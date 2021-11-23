@@ -4,4 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Angel_login"/>
+    tools:context=".Angel_login">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".login">
+        <EditText
+            android:id="@+id/Angel_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4pt"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:hint="@string/Username"/>
+        <EditText
+            android:id="@+id/Angel_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:layout_marginLeft="4pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/password"/>
+        <Button
+            android:id="@+id/Angel_btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4pt"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:text="@string/login"/>
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

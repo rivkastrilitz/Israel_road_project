@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Traveler_login">
+    tools:context=".User_registration">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,9 +13,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".login">
+        tools:context=".Register">
         <EditText
-            android:id="@+id/Traveler_email"
+            android:id="@+id/registration_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4pt"
@@ -23,22 +23,29 @@
             android:layout_marginTop="10pt"
             android:hint="@string/Username"/>
         <EditText
-            android:id="@+id/Traveler_password"
+            android:id="@+id/registration_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10pt"
             android:layout_marginLeft="4pt"
             android:layout_marginRight="4pt"
             android:hint="@string/password"/>
+        <EditText
+            android:id="@+id/registration_UserType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:layout_marginLeft="4pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/UserType"/>
         <Button
-            android:id="@+id/Traveler_btn_login"
+            android:id="@+id/registration_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4pt"
             android:layout_marginLeft="4pt"
             android:layout_marginTop="10pt"
-            android:text="@string/login"/>
-
+            android:text="@string/signUp"/>
 
 
     </LinearLayout>
