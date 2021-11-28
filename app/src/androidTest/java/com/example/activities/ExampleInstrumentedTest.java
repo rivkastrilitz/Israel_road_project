@@ -1,4 +1,4 @@
-package com.example.israel_road;
+package com.example.activities;
 
 import android.content.Context;
 
