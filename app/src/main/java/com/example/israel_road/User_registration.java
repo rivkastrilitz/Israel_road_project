@@ -50,73 +50,83 @@ public class User_registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = user_name.getText().toString().trim();
-                String password= pass_word.getText().toString().trim();
-                String type=user_type.getText().toString().trim();
-                String Name=name.getText().toString().trim();
+                String txtUser_name = user_name.getText().toString().trim();
+                String txtPassword= pass_word.getText().toString().trim();
+                String txtType=user_type.getText().toString().trim();
+                String txtName=name.getText().toString().trim();
 
 
-                if(email.isEmpty())
+                if(txtUser_name.isEmpty())
                 {
                     user_name.setError("Email is empty");
                     user_name.requestFocus();
                     return;
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                if(!Patterns.EMAIL_ADDRESS.matcher(txtUser_name).matches())
                 {
-                    user_name.setError("Enter the valid email address");
+                    user_name.setError("Enter the valid txtEmail address");
                     user_name.requestFocus();
                     return;
                 }
-                if(password.isEmpty())
+                if(txtPassword.isEmpty())
                 {
-                    pass_word.setError("Enter the password");
+                    pass_word.setError("Enter the txtPassword");
                     pass_word.requestFocus();
                     return;
                 }
-                if(password.length()<6)
+                if(txtPassword.length()<6)
                 {
-                    pass_word.setError("Length of the password should be more than 6");
+                    pass_word.setError("Length of the txtPassword should be more than 6");
                     pass_word.requestFocus();
                     return;
                 }
 
+                registerUser( txtName , txtUser_name , txtPassword,txtType);
 
 
-                mAuth.createUserWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
-                    public void onSuccess(AuthResult authResult) {
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("name", Name);
-                        map.put("email", user_name);
-                        map.put("type", type);
-                        map.put("id", mAuth.getCurrentUser().getUid());
-                        databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(User_registration.this, MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    Toast.makeText(User_registration.this,"You are successfully Registered", Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
-                                    finish();
 
-                                }
-                            }
+            }
 
-                        });
-                    }
 
-                }).addOnFailureListener(new OnFailureListener() {
+        });
+    }
+
+    private void registerUser(final String Name, final String UserName, String Password,final String Type){
+
+        mAuth.createUserWithEmailAndPassword(UserName , Password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("name", Name);
+                map.put("Email", UserName);
+                map.put("type", Type);
+                map.put("id", mAuth.getCurrentUser().getUid());
+
+                databaseRef.child(Type).child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(User_registration.this,"You are not Registered! Try again",Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(User_registration.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Toast.makeText(User_registration.this,"You are successfully Registered", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            finish();
 
+                        }
                     }
+
                 });
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(User_registration.this,"You are not Registered! Try again",Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
-}
 
+
+}
