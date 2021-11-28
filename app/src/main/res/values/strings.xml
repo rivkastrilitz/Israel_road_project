@@ -7,5 +7,7 @@
     <string name="Username">שם משתמש</string>
     <string name="password">סיסמא </string>
     <string name="signUp">הרשם </string>
+    <string name="name">שם </string>
+
     <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
 </resources>

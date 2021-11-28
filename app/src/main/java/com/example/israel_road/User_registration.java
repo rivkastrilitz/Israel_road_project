@@ -1,12 +1,10 @@
 package com.example.israel_road;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -14,14 +12,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class User_registration extends AppCompatActivity {
-    Button btn2_signup;
-    EditText user_name, pass_word ,user_type;
-    FirebaseAuth mAuth;
+    private Button btn2_signup;
+    private EditText user_name,name, pass_word ,user_type ;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseRef;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +37,25 @@ public class User_registration extends AppCompatActivity {
         user_name=findViewById(R.id.registration_username);
         pass_word=findViewById(R.id.registration_password);
         user_type=findViewById(R.id.registration_UserType);
+        name=findViewById(R.id.registration_name);
         btn2_signup=findViewById(R.id.registration_signUp);
 
         mAuth=FirebaseAuth.getInstance();
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+
+
+
         btn2_signup.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
                 String email = user_name.getText().toString().trim();
                 String password= pass_word.getText().toString().trim();
-                //todo save thr type in fireBase
                 String type=user_type.getText().toString().trim();
+                String Name=name.getText().toString().trim();
+
+
                 if(email.isEmpty())
                 {
                     user_name.setError("Email is empty");
@@ -64,17 +80,37 @@ public class User_registration extends AppCompatActivity {
                     pass_word.requestFocus();
                     return;
                 }
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+
+                mAuth.createUserWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
+                    public void onSuccess(AuthResult authResult) {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("name", Name);
+                        map.put("email", user_name);
+                        map.put("type", type);
+                        map.put("id", mAuth.getCurrentUser().getUid());
+                        databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Intent intent = new Intent(User_registration.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    Toast.makeText(User_registration.this,"You are successfully Registered", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                    finish();
+
+                                }
+                            }
+
+                        });
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(User_registration.this,"You are successfully Registered", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(User_registration.this,"You are not Registered! Try again",Toast.LENGTH_SHORT).show();
-                        }
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(User_registration.this,"You are not Registered! Try again",Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
