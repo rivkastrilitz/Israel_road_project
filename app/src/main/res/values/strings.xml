@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">israel_road</string>
-    <string name="Angle_login">מלאך התחברות</string>
-    <string name="Traveler_login">מטייל התחברות</string>
     <string name="login">התחברות</string>
 
     <string name="Username">שם משתמש</string>

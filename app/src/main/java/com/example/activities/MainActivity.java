@@ -14,11 +14,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button Angel_login_btn = findViewById(R.id.Angel_login);
-        Button Traveler_login_btn = findViewById(R.id.Traveler_login);
+        Button login_btn = findViewById(R.id.login);
+
         Button signup_btn = findViewById(R.id.Sign_up);
-        Angel_login_btn.setOnClickListener(v-> startActivity(new Intent(this,Angel_login.class )));
-        Traveler_login_btn.setOnClickListener(v-> startActivity(new Intent(this,Traveler_login.class )));
+        login_btn.setOnClickListener(v-> startActivity(new Intent(this,User_Login.class )));
         signup_btn.setOnClickListener(v-> startActivity(new Intent(this,User_registration.class )));
 
     }

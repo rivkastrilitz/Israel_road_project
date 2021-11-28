@@ -10,16 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Israel_road">
         <activity
-            android:name="com.example.activities.User_registration"
+            android:name=".User_Login"
             android:exported="false" />
         <activity
-            android:name="com.example.activities.Traveler_login"
+            android:name=".User_registration"
             android:exported="false" />
         <activity
-            android:name="com.example.activities.Angel_login"
-            android:exported="false" />
-        <activity
-            android:name="com.example.activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

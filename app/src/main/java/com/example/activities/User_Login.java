@@ -1,8 +1,9 @@
 package com.example.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -11,16 +12,17 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Traveler_login extends AppCompatActivity {
+public class User_Login extends AppCompatActivity {
     private EditText user_name, pass_word;
+    private Button btn_login;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_traveler_login);
+        setContentView(R.layout.activity_user_login);
         user_name=findViewById(R.id.Traveler_email);
         pass_word=findViewById(R.id.Traveler_password);
-        Button btn_login = findViewById(R.id.Traveler_btn_login);
+        btn_login = findViewById(R.id.Traveler_btn_login);
 
         mAuth=FirebaseAuth.getInstance();
         btn_login.setOnClickListener(new View.OnClickListener(){
@@ -50,9 +52,10 @@ public class Traveler_login extends AppCompatActivity {
                 }
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(Traveler_login.this, MainActivity.class));
+                        //todo if for type and send to wanted page
+                        startActivity(new Intent(User_Login.this, MainActivity.class));
                     } else {
-                        Toast.makeText(Traveler_login.this,
+                        Toast.makeText(User_Login.this,
                                 "Please Check Your login Credentials",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -62,6 +65,4 @@ public class Traveler_login extends AppCompatActivity {
         });
 
     }
-
 }
-

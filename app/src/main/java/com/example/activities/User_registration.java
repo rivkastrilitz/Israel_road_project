@@ -102,7 +102,7 @@ public class User_registration extends AppCompatActivity {
                 map.put("type", Type);
                 map.put("id", mAuth.getCurrentUser().getUid());
 
-                databaseRef.child(Type).child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
