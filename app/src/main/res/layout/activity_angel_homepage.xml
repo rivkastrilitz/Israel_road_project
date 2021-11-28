@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Angel_homePage">
+
+    <EditText
+        android:id="@+id/welcome_angel"
+        android:layout_width="357dp"
+        android:layout_height="94dp"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:text="Welcome to username Angel"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/HostingOffer1"
+        android:layout_width="340dp"
+        android:layout_height="57dp"
+        android:text="HostingOffer1"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <Button
+        android:id="@+id/GoToHostingOffer1"
+        android:layout_width="134dp"
+        android:layout_height="37dp"
+        android:text="GoToOffer1"
+        tools:layout_editor_absoluteX="228dp"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <TextView
+        android:id="@+id/HostingOffer2"
+        android:layout_width="340dp"
+        android:layout_height="57dp"
+        android:text="HostingOffer2"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="231dp" />
+
+    <Button
+        android:id="@+id/GoToHostingOffer2"
+        android:layout_width="134dp"
+        android:layout_height="37dp"
+        android:text="GoToOffer2"
+        tools:layout_editor_absoluteX="228dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <Button
+        android:id="@+id/createOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/PostHostingOffer"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="530dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

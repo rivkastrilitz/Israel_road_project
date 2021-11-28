@@ -8,4 +8,12 @@
     <string name="name">שם </string>
 
     <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
+    <string name="ForgotMyPassword">שכחתי סיסמא </string>
+
+    <string name="Search">חיפוש  </string>
+    <string name="GoToMap">אפשרות חיפוש לפי מפה למטייל </string>
+    <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
+    <string name="ContactAngel">דרך התקשרות למלאך </string>
+    <string name="ContactTraveler">התקשרות למטייל</string>
+
 </resources>
