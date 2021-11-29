@@ -1,19 +1,20 @@
 <resources>
     <string name="app_name">israel_road</string>
     <string name="login">התחברות</string>
-
     <string name="Username">שם משתמש</string>
     <string name="password">סיסמא </string>
     <string name="signUp">הרשם </string>
     <string name="name">שם </string>
-
+    <string name="welcome">ברוך הבא  %1$s </string>
     <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
     <string name="ForgotMyPassword">שכחתי סיסמא </string>
-
     <string name="Search">חיפוש  </string>
+    <string name="location"> מיקום </string>
+    <string name="date">תאריך </string>
     <string name="GoToMap">אפשרות חיפוש לפי מפה למטייל </string>
     <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
-    <string name="ContactAngel">דרך התקשרות למלאך </string>
-    <string name="ContactTraveler">התקשרות למטייל</string>
+    <string name="Contact">צור קשר </string>
+
+
 
 </resources>

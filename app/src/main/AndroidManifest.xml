@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Israel_road">
         <activity
+            android:name=".Traveler_homePage"
+            android:exported="false" />
+        <activity
             android:name=".User_Login"
             android:exported="false" />
         <activity

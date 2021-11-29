@@ -15,7 +15,7 @@
         android:gravity="center"
         tools:context=".login">
         <EditText
-            android:id="@+id/Traveler_email"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4pt"
@@ -23,7 +23,7 @@
             android:layout_marginTop="10pt"
             android:hint="@string/Username"/>
         <EditText
-            android:id="@+id/Traveler_password"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10pt"
@@ -31,7 +31,7 @@
             android:layout_marginRight="4pt"
             android:hint="@string/password"/>
         <Button
-            android:id="@+id/Traveler_btn_login"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4pt"

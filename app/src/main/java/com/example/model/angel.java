@@ -2,7 +2,7 @@ package com.example.model;
 
 import com.example.interfaces.Angle;
 
-public class angle implements Angle {
+public class angel implements Angle {
 
     @Override
     public String getName() {
