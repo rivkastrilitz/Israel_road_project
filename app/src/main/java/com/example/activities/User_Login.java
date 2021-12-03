@@ -1,5 +1,6 @@
 package com.example.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,26 +11,37 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.model.user;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class User_Login extends AppCompatActivity {
     private EditText user_name, pass_word;
     private Button btn_login;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseRef;
+    private String type, txtEmail, txtPassword ,uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
-        user_name=findViewById(R.id.email);
-        pass_word=findViewById(R.id.password);
+        user_name = findViewById(R.id.email);
+        pass_word = findViewById(R.id.password);
         btn_login = findViewById(R.id.btn_login);
 
-        mAuth=FirebaseAuth.getInstance();
-        btn_login.setOnClickListener(new View.OnClickListener(){
+        mAuth = FirebaseAuth.getInstance();
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+        btn_login.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v){
-                String txtEmail = user_name.getText().toString().trim();
-                String txtPassword = pass_word.getText().toString().trim();
+            public void onClick(View v) {
+                txtEmail = user_name.getText().toString().trim();
+                txtPassword = pass_word.getText().toString().trim();
                 if (txtEmail.isEmpty()) {
                     user_name.setError("Email is empty");
                     user_name.requestFocus();
@@ -50,40 +62,58 @@ public class User_Login extends AppCompatActivity {
                     pass_word.requestFocus();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
 
-                        String type=readTypeFirebase(txtEmail);
-                        if(type.equals("Angel")||type.equals("angel")){
-                            Intent intent=new Intent(User_Login.this, Angel_homePage.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            Toast.makeText(User_Login.this,"Angel", Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                            finish();
+                mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            uid = mAuth.getCurrentUser().getUid();
+                            databaseRef.child("Users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        user currUser = task.getResult().getValue(user.class);
+                                        assert currUser != null;
+                                        type = currUser.getType();
+
+
+                                        if (type.equals("Angel") || type.equals("angel")) {
+                                            Intent intent = new Intent(User_Login.this, Angel_homePage.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            Toast.makeText(User_Login.this, "Angel", Toast.LENGTH_SHORT).show();
+                                            //sent currUser id and name to next activity
+                                            intent.putExtra("Uid", uid);
+                                            intent.putExtra("name",currUser.getName());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        if (type.equals("Traveler") || type.equals("traveler")) {
+                                            Intent intent = new Intent(User_Login.this, Traveler_homePage.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            Toast.makeText(User_Login.this, "Traveler", Toast.LENGTH_SHORT).show();
+                                            //sent currUser id and name to next activity
+                                            intent.putExtra("Uid", uid);
+                                            intent.putExtra("name",currUser.getName());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+                                    }
+                                }
+                            });
+
+                        } else {
+                            Toast.makeText(User_Login.this,
+                                    "Please Check Your login Credentials",
+                                    Toast.LENGTH_SHORT).show();
                         }
-                        if(type.equals("Traveler")||type.equals("traveler")){
-                            Intent intent=new Intent(User_Login.this, Traveler_homePage.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            Toast.makeText(User_Login.this,"Traveler", Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                            finish();
-                        }
-
-
-                    }else {
-                        Toast.makeText(User_Login.this,
-                                "Please Check Your login Credentials",
-                                Toast.LENGTH_SHORT).show();
                     }
 
                 });
+
+
             }
         });
 
-    }
-    //todo read from fire base according to id
-    public String readTypeFirebase(String email){
 
-        return "Traveler";
     }
 }

@@ -6,15 +6,22 @@
     <string name="signUp">הרשם </string>
     <string name="name">שם </string>
     <string name="welcome">ברוך הבא  %1$s </string>
+
     <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
     <string name="ForgotMyPassword">שכחתי סיסמא </string>
     <string name="Search">חיפוש  </string>
     <string name="location"> מיקום </string>
     <string name="date">תאריך </string>
-    <string name="GoToMap">אפשרות חיפוש לפי מפה למטייל </string>
-    <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
-    <string name="Contact">צור קשר </string>
 
+    //Angel
+    <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
+    <string name="DeleteHostingOffer">מחק הצעת אירוח קיימת </string>
+    <string name="address">כתובת  </string>
+    <string name="capacity">כמות מקסימלית לאכלוס  </string>
+    <string name="fromdate">מתאריך  </string>
+    <string name="todate">עד תאריך  </string>
+    <string name="restrictions">הגבלות והערות  </string>
+    <string name="Contact">צור קשר </string>
 
 
 </resources>

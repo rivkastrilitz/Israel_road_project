@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Angel_homePage">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".Angel_homePage"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-58dp">
+
+        <EditText
+            android:id="@+id/TextWelcomeAngel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/welcome"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.726"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.102" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="286dp"
+            android:layout_height="49dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="הכנס פרטים וצור הצעת אירוח חדשה "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.76"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.197" />
+
+        <EditText
+            android:id="@+id/post_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/address" />
+
+        <EditText
+            android:id="@+id/post_fromdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/fromdate" />
+
+        <EditText
+            android:id="@+id/post_todate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/todate" />
+
+        <EditText
+            android:id="@+id/post_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/capacity" />
+
+        <EditText
+            android:id="@+id/post_restrictions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/restrictions" />
+
+
+        <Button
+            android:id="@+id/createOffer"
+            android:layout_width="204dp"
+            android:layout_height="51dp"
+            android:text="@string/PostHostingOffer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.654"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.862" />
+
+        <Button
+            android:id="@+id/deleteOffer"
+            android:layout_width="198dp"
+            android:layout_height="50dp"
+            android:text="@string/DeleteHostingOffer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.638"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.954" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
