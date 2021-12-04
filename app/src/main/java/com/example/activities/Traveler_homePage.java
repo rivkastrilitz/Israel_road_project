@@ -36,15 +36,9 @@ public class Traveler_homePage extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference();
         getTravelerUid();
         mystorge = FirebaseStorage.getInstance().getReference().child("Users").child(user_id);
-
-        Intent intent=getIntent();
-        Bundle nameFromLogin = intent.getExtras();
-        if(nameFromLogin != null)
-        {
-            TravelerName= nameFromLogin.getString("name");
-        }
+        getTravelerName();
         String testString = String.format(getResources().getString(R.string.welcome), TravelerName);
-        Log.i("ARG", "another_string = " + testString);
+
 
 
 
