@@ -25,7 +25,7 @@ public class User_Login extends AppCompatActivity {
     private Button btn_login;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
-    private String type, txtEmail, txtPassword ,uid;
+    private String txtEmail, txtPassword ,uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,36 +66,21 @@ public class User_Login extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             uid = mAuth.getCurrentUser().getUid();
                             databaseRef.child("Users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                     if (task.isSuccessful()) {
                                         user currUser = task.getResult().getValue(user.class);
                                         assert currUser != null;
-                                        type = currUser.getType();
 
-
-                                        if (type.equals("Angel") || type.equals("angel")) {
-                                            Intent intent = new Intent(User_Login.this, Angel_homePage.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            Toast.makeText(User_Login.this, "Angel", Toast.LENGTH_SHORT).show();
-                                            //sent currUser id and name to next activity
-                                            intent.putExtra("Uid", uid);
-                                            intent.putExtra("name",currUser.getName());
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                        if (type.equals("Traveler") || type.equals("traveler")) {
-                                            Intent intent = new Intent(User_Login.this, Traveler_homePage.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            Toast.makeText(User_Login.this, "Traveler", Toast.LENGTH_SHORT).show();
-                                            //sent currUser id and name to next activity
-                                            intent.putExtra("Uid", uid);
-                                            intent.putExtra("name",currUser.getName());
-                                            startActivity(intent);
-                                            finish();
-                                        }
+                                        Intent intent = new Intent(User_Login.this, HomePageActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        Toast.makeText(User_Login.this, "Angel", Toast.LENGTH_SHORT).show();
+                                        //sent currUser id and name to next activity
+                                        intent.putExtra("Uid", uid);
+                                        intent.putExtra("name",currUser.getName());
+                                        startActivity(intent);
+                                        finish();
 
                                     }
                                 }
