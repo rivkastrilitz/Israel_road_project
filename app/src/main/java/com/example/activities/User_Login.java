@@ -75,7 +75,7 @@ public class User_Login extends AppCompatActivity {
 
                                         Intent intent = new Intent(User_Login.this, HomePageActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        Toast.makeText(User_Login.this, "Angel", Toast.LENGTH_SHORT).show();
+
                                         //sent currUser id and name to next activity
                                         intent.putExtra("Uid", uid);
                                         intent.putExtra("name",currUser.getName());
