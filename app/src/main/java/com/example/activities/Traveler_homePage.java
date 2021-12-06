@@ -41,7 +41,14 @@ public class Traveler_homePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traveler_home_page);
 
-        actionBar = getSupportActionBar();
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+//        user_id=mAuth.getCurrentUser().getUid();
+//        mystorge = FirebaseStorage.getInstance().getReference().child("Users").child(user_id);
+//        getTravelerName();
+//        String testString = String.format(getResources().getString(R.string.welcome), TravelerName);
+
+
+//        actionBar = getSupportActionBar();
 
 
 //        BottomNavigationView navigationView = findViewById(R.id.navigation);
@@ -55,11 +62,7 @@ public class Traveler_homePage extends AppCompatActivity {
 
 
 
-        databaseRef = FirebaseDatabase.getInstance().getReference();
-        getTravelerUid();
-        mystorge = FirebaseStorage.getInstance().getReference().child("Users").child(user_id);
-        getTravelerName();
-        String testString = String.format(getResources().getString(R.string.welcome), TravelerName);
+
 
 
     }

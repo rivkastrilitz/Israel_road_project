@@ -41,7 +41,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     private String uid = "";
     private EditText AngelAddress,fromDate,toDate,capacity,restrictions;
-    private Button createOffer,deleteOffer;
+    private Button createOffer,deleteOffer ;
     private ActionBar actionBar;
 
     @Override
@@ -60,6 +60,7 @@ public class Angel_homePage extends AppCompatActivity {
         createOffer=(Button)findViewById(R.id.createOffer);
         deleteOffer=(Button)findViewById(R.id.deleteOffer);
 
+
         createOffer.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -76,6 +77,8 @@ public class Angel_homePage extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

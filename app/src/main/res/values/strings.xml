@@ -6,6 +6,7 @@
     <string name="signUp">הרשם </string>
     <string name="name">שם </string>
     <string name="welcome">ברוך הבא  %1$s </string>
+    <string name="mainHeadLine">ברוכים הבאים ל israel_road</string>
 
     <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
     <string name="ForgotMyPassword">שכחתי סיסמא </string>
@@ -23,6 +24,7 @@
     <string name="restrictions">הגבלות והערות  </string>
     <string name="Contact">צור קשר </string>
     <string name="addOffer">הצע אירוח</string>
+    <string name="myOffer">ההצעות שלי</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
