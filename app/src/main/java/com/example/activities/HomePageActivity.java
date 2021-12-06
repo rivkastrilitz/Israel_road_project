@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.fragments.AngelHomeFragment;
 import com.example.fragments.profileFragment;
@@ -19,6 +20,8 @@ import com.google.android.material.navigation.NavigationBarView;
 public class HomePageActivity extends AppCompatActivity {
     private Button addOffer,searchOffer;
     private ActionBar actionBar;
+    private TextView welcome;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         addOffer=findViewById(R.id.addOffers);
         searchOffer=findViewById(R.id.serchOffers);
+        welcome=(TextView)findViewById(R.id.TextWelcome);
+        getUserName();
+        welcome.setText( "ברוך הבא "+userName);
 
         addOffer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,5 +94,14 @@ public class HomePageActivity extends AppCompatActivity {
 //                }
 //            };
 
+    public void getUserName(){
+        Intent intent=getIntent();
+        Bundle nameFromLogin = intent.getExtras();
+        if(nameFromLogin != null)
+        {
+            userName= nameFromLogin.getString("name");
+        }
+
+    }
 
 }

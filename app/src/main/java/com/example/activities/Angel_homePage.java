@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fragments.AngelHomeFragment;
@@ -45,6 +46,7 @@ public class Angel_homePage extends AppCompatActivity {
     private EditText AngelAddress,fromDate,toDate,capacity,restrictions;
     private Button createOffer,deleteOffer ;
     private ActionBar actionBar;
+
     static int offerKey=1;
 
 

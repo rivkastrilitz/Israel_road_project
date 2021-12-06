@@ -32,7 +32,7 @@ public class Traveler_homePage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
     private StorageReference mystorge;
-    private String user_id = "";
+    private String user_id;
     private String TravelerName;
     ActionBar actionBar;
 
@@ -93,26 +93,6 @@ public class Traveler_homePage extends AppCompatActivity {
 //                }
 //            };
 
-
-
-    public void getTravelerUid(){
-        Intent intent=getIntent();
-        Bundle UidFromLogin = intent.getExtras();
-        if(UidFromLogin != null)
-        {
-            user_id = UidFromLogin.getString("Uid");
-        }
-
-    }
-    public void getTravelerName(){
-        Intent intent=getIntent();
-        Bundle nameFromLogin = intent.getExtras();
-        if(nameFromLogin != null)
-        {
-            TravelerName= nameFromLogin.getString("name");
-        }
-
-    }
 
 
 
