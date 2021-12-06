@@ -1,5 +1,7 @@
 package com.example.activities;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +45,8 @@ public class Angel_homePage extends AppCompatActivity {
     private EditText AngelAddress,fromDate,toDate,capacity,restrictions;
     private Button createOffer,deleteOffer ;
     private ActionBar actionBar;
+    static int offerKey=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +82,16 @@ public class Angel_homePage extends AppCompatActivity {
             }
         });
 
-
-
+        //todo override the back button
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                Intent intent = new Intent(Angel_homePage.this, HomePageActivity.class);
+//                startActivity(intent);
+//                finish();
+//
+//            }
+//        };
 
 
 
@@ -89,7 +101,7 @@ public class Angel_homePage extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnItemSelectedListener(selectedListener);
 
-        actionBar.setTitle("Home");
+        actionBar.setTitle("Create Hosting Offer");
         AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content, angelHomeFragment, "");
@@ -97,6 +109,8 @@ public class Angel_homePage extends AppCompatActivity {
 
 
     }
+
+
 
     private NavigationBarView.OnItemSelectedListener selectedListener =
             new NavigationBarView.OnItemSelectedListener() {
@@ -144,11 +158,13 @@ public class Angel_homePage extends AppCompatActivity {
         map.put("toDate", todate);
         map.put("capacity",capacity );
         map.put("restrictions and notes",restrictions );
-        //todo id for offers so it wont override existing offers
-        databaseRef.child("HostingOffer").child(mAuth.getCurrentUser().getUid()).child("offer").setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        String offkey =Integer.toString(offerKey);
+        databaseRef.child("HostingOffer").child(mAuth.getCurrentUser().getUid()).child("offer"+offkey).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    offerKey++;
                     Intent intent = new Intent(Angel_homePage.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     Toast.makeText(Angel_homePage.this, "Your offer successfully Registered", Toast.LENGTH_SHORT).show();

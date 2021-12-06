@@ -44,7 +44,9 @@ public class HomePageActivity extends AppCompatActivity {
 
             }
         });
-//
+
+
+
 //        actionBar = getSupportActionBar();
 //
 //        BottomNavigationView navigationView = findViewById(R.id.navigation);

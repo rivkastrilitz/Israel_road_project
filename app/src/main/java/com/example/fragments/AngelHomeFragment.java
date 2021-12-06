@@ -1,14 +1,19 @@
 package com.example.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.activities.Angel_homePage;
+import com.example.activities.HomePageActivity;
 import com.example.activities.R;
+import com.example.activities.Traveler_homePage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +60,8 @@ public class AngelHomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override

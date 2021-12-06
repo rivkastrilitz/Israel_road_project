@@ -48,25 +48,25 @@ public class Traveler_homePage extends AppCompatActivity {
 //        String testString = String.format(getResources().getString(R.string.welcome), TravelerName);
 
 
+
+
 //        actionBar = getSupportActionBar();
-
-
+//
 //        BottomNavigationView navigationView = findViewById(R.id.navigation);
 //        navigationView.setOnItemSelectedListener(selectedListener);
-
-//        actionBar.setTitle("Home");
-//        TravelerHomeFragment travelerHomeFragment = new TravelerHomeFragment();
+//
+//        actionBar.setTitle("Search Hosting Offer");
+//        TravelerHomeFragment Travelerhomefrag = new TravelerHomeFragment();
 //        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//        ft1.replace(R.id.content, travelerHomeFragment, "");
+//        ft1.replace(R.id.content, Travelerhomefrag, "");
 //        ft1.commit();
 
 
 
 
 
-
     }
-//
+
 //    private NavigationBarView.OnItemSelectedListener selectedListener =
 //            new NavigationBarView.OnItemSelectedListener() {
 //                @Override
@@ -74,9 +74,9 @@ public class Traveler_homePage extends AppCompatActivity {
 //                    switch (item.getItemId()){
 //                        case R.id.nav_home:
 //                            actionBar.setTitle("Home");
-//                            TravelerHomeFragment travelerHomeFragment = new TravelerHomeFragment();
+//                            TravelerHomeFragment Travelerhomefrag = new TravelerHomeFragment();
 //                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//                            ft1.replace(R.id.content, travelerHomeFragment, "");
+//                            ft1.replace(R.id.content, Travelerhomefrag, "");
 //                            ft1.commit();
 //                            return true;
 //                        case R.id.nav_profile:
