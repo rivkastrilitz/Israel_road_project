@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.Year;
 import java.util.HashMap;
 
 public class Angel_homePage extends AppCompatActivity {
@@ -69,16 +70,9 @@ public class Angel_homePage extends AppCompatActivity {
                 String txtCapacity=capacity.getText().toString();
                 String txtRestrictions=restrictions.getText().toString();
 
-                //todo add if(is empty ) to all edittxt
-                //todo chek date validation -and also if not past date
-                if(txtAngelAddress.isEmpty())
-                {
-                    AngelAddress.setError("address is empty");
-                    AngelAddress.requestFocus();
-                    return;
+                if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity)) {
+                    addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions);
                 }
-
-                addOffer(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtRestrictions);
 
             }
         });
@@ -147,8 +141,8 @@ public class Angel_homePage extends AppCompatActivity {
         map.put("toDate", todate);
         map.put("capacity",capacity );
         map.put("restrictions and notes",restrictions );
-
-        databaseRef.child("HostingOffer").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+        //todo id for offers so it wont override existing offers
+        databaseRef.child("HostingOffer").child(mAuth.getCurrentUser().getUid()).child("offer").setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -163,6 +157,43 @@ public class Angel_homePage extends AppCompatActivity {
 
         });
 
+
+    }
+
+    private boolean checkValidation(final String txtAngelAddress,final String txtFromDate,final String txtToDate,final String txtCapacity){
+
+        if(txtAngelAddress.isEmpty())
+        {
+            AngelAddress.setError("address is empty");
+            AngelAddress.requestFocus();
+            return false;
+
+        }
+        if(txtCapacity.isEmpty())
+        {
+            capacity.setError("capacity is empty");
+            capacity.requestFocus();
+            return false;
+
+        }
+        if(txtFromDate.isEmpty() || txtToDate.isEmpty())
+        {
+            fromDate.setError("date is empty");
+            fromDate.requestFocus();
+            return false;
+
+        }
+
+        String [] arrFromDate=txtFromDate.split("/");
+        String [] arrtoDate=txtFromDate.split("/");
+        Year curryear = Year.now();
+        if(Integer.parseInt(arrFromDate[2])<curryear.getValue() || Integer.parseInt(arrtoDate[2])<curryear.getValue()){
+            fromDate.setError("this year past");
+            fromDate.requestFocus();
+            return false;
+        }
+
+        return true;
 
     }
 
