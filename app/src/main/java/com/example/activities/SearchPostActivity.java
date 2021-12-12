@@ -3,6 +3,7 @@ package com.example.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +40,7 @@ public class SearchPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_post);
         mAuth = FirebaseAuth.getInstance();
-        databaseRef = FirebaseDatabase.getInstance().getReference("HostingOffers");
+        databaseRef = FirebaseDatabase.getInstance().getReference();
 
         date=(EditText)findViewById(R.id.Traveler_date_input);
         location=(EditText) findViewById(R.id.Traveler_location_input);
@@ -47,14 +48,18 @@ public class SearchPostActivity extends AppCompatActivity {
         uid=mAuth.getCurrentUser().getUid();
         postList=new ArrayList<>();
 
+        readPostFromFirebase();
+        
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 txtDate=date.getText().toString();
                 txtLocation=location.getText().toString();
-                readPostFromFirebase();
+                //todo sort the post befor showing them in home page
                 post p1=postList.get(0);
-                Toast.makeText(SearchPostActivity.this,p1.getAddress(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchPostActivity.this, p1.getAddress(), Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent(SearchPostActivity.this,HomePageActivity.class);
+                startActivity(intent);
 
 
             }
@@ -64,32 +69,29 @@ public class SearchPostActivity extends AppCompatActivity {
     }
 
     private void SortOffersByDate(List<post> list){
-        for (int i = 0; i < list.size(); i++) {
 
-        }
 
     }
     private void SortOfferByLocation(List<post>list){
 
     }
 
-    private void Swap(int i, int j,List<post>list){
-        post tmppost=list.get(i);
-//        list.get(i)= list.get(j);
-//        list.get(j)=tmppost;
 
-    }
+
     //todo remember to delete from firebase post that their data is dew
-    //todo chek wat best local list or global one
 
     private void readPostFromFirebase(){
-      databaseRef.addValueEventListener(new ValueEventListener() {
+      databaseRef.child("HostingOffer").addValueEventListener(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot snapshot) {
               if(snapshot.exists()){
                   postList.clear();
                   for (DataSnapshot currPost:snapshot.getChildren() ) {
-                      postList.add(currPost.getValue(post.class));
+                      post tempPost1 =currPost.getValue(post.class);
+                      String post_id = currPost.getKey();
+                      post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
+                              tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getUid());
+                      postList.add(tempPost2);
                   }
               }
           }

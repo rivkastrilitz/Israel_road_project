@@ -146,9 +146,9 @@ public class Angel_homePage extends AppCompatActivity {
     }
 
     private void addOffer(final String address, final String fromdate, String todate,final String capacity,final String restrictions) {
-
-        post newpost=new post(address,fromdate,todate,capacity,restrictions);
-        databaseRef.child("HostingOffer").child(mAuth.getCurrentUser().getUid()).push().setValue(newpost).addOnCompleteListener(new OnCompleteListener<Void>() {
+        uid=mAuth.getCurrentUser().getUid();
+        post newpost=new post(address,fromdate,todate,capacity,restrictions,uid);
+        databaseRef.child("HostingOffer").push().setValue(newpost).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
