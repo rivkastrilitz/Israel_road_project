@@ -44,7 +44,7 @@ public class HomePageActivity extends AppCompatActivity {
         searchOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent   =new Intent(HomePageActivity.this, Traveler_homePage.class);
+                Intent intent   =new Intent(HomePageActivity.this, SearchPostActivity.class);
                 startActivity(intent);
                 finish();
 

@@ -22,9 +22,6 @@
             android:name=".Angel_homePage"
             android:exported="false" />
         <activity
-            android:name=".Traveler_homePage"
-            android:exported="false" />
-        <activity
             android:name=".User_Login"
             android:exported="false" />
         <activity

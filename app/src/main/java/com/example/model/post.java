@@ -29,6 +29,14 @@ public class post {
         this.restrictions=restrictions;
 
     }
+    //copy constructor
+    public post(post p){
+        this.address=p.getAddress();
+        this.fromDate=p.getFromDate();
+        this.toDate=p.getToDate();
+        this.capacity=p.getCapacity();
+        this.restrictions=p.getRestrictions();
+    }
 
     public String getDescription() {
         return description;
