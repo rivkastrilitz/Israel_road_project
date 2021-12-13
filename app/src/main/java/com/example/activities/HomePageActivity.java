@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,16 +14,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.adapters.PostAdapter;
 import com.example.fragments.AngelHomeFragment;
 import com.example.fragments.profileFragment;
+import com.example.model.post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
     private Button addOffer,searchOffer;
     private ActionBar actionBar;
     private TextView welcome;
     private String userName;
+    private RecyclerView postsRecycle;
+    private FirebaseAuth mAuth;
+    private String uid;
+    private List<post> postList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +44,10 @@ public class HomePageActivity extends AppCompatActivity {
         welcome=(TextView)findViewById(R.id.TextWelcome);
         getUserName();
         welcome.setText( "ברוך הבא "+userName);
+
+        postsRecycle = findViewById(R.id.recyclePosts);
+        mAuth = FirebaseAuth.getInstance();
+        uid=mAuth.getCurrentUser().getUid();
 
         addOffer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +66,9 @@ public class HomePageActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
 

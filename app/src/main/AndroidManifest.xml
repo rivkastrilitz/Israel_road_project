@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Israel_road">
         <activity
+            android:name=".postsFeedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostShapeActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchPostActivity"
             android:exported="false" />
         <activity
