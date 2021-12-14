@@ -9,7 +9,7 @@ public class post {
     private String imageurl;
     private String postid;
     private String publisher;
-    private String address,fromDate,toDate,capacity,restrictions,uid;
+    private String address,fromDate,toDate,capacity,restrictions,publisherUid;
 
     public post() {
     }
@@ -21,13 +21,14 @@ public class post {
         this.publisher = publisher;
     }
 
-    public post(String Address,String fromDate,String toDate,String capacity,String restrictions,String userId){
+    public post(String Address,String fromDate,String toDate,String capacity,String restrictions,String userId,String postid){
         this.address=Address;
         this.fromDate=fromDate;
         this.toDate=toDate;
         this.capacity=capacity;
         this.restrictions=restrictions;
-        this.uid=userId;
+        this.publisherUid=userId;
+        this.postid=postid;
 
     }
     //copy constructor
@@ -37,7 +38,7 @@ public class post {
         this.toDate=p.getToDate();
         this.capacity=p.getCapacity();
         this.restrictions=p.getRestrictions();
-        this.uid=p.getUid();
+        this.publisherUid=p.getpublisherUid();
     }
 
     public String getDescription() {
@@ -112,8 +113,8 @@ public class post {
         this.toDate = toDate;
     }
 
-    public String getUid() {
-        return uid;
+    public String getpublisherUid() {
+        return publisherUid;
     }
 
 }

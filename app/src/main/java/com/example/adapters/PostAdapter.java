@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.activities.R;
+import com.example.activities.postMoreDeatailsActivity;
 import com.example.model.post;
 
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context context;
     String uid;
     List<post> PostList;
+    private List<String> postIdsList;
 
     public PostAdapter(Context context,String uid){
         this.context = context;
         this.uid=uid;
-//        this.PostList=posts;
     }
 
     @Override
@@ -45,10 +46,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtToDate.setText(PostList.get(position).getToDate());
 
         holder.btnSeeMoreDetails.setOnClickListener(view -> {
-//            Intent intent = new Intent(context, DetailsPostAssociation.class);
-//            intent.putExtra("assoc_id",association_user_id);
-//            intent.putExtra("post_id",PostList.get(position).second);
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, postMoreDeatailsActivity.class);
+            intent.putExtra("user_id",uid);
+           // intent.putExtra("post_id",PostList.get(position).);
+            context.startActivity(intent);
         });
 
     }
@@ -60,6 +61,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public void setPosts(List<post> posts){
         this.PostList = posts;
+        notifyDataSetChanged();
+    }
+
+    public void setPostsIdList(List<String> PostsIdList){
+        this.postIdsList = PostsIdList;
         notifyDataSetChanged();
     }
 

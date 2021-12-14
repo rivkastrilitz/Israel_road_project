@@ -30,11 +30,10 @@ import java.util.List;
 public class SearchPostActivity extends AppCompatActivity {
 
     private EditText date , location;
-    private Button search;
+    private Button search ,back;
     private String txtDate,txtLocation;
 
 
-   //todo make a back button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +41,7 @@ public class SearchPostActivity extends AppCompatActivity {
         date=(EditText)findViewById(R.id.Traveler_date_input);
         location=(EditText) findViewById(R.id.Traveler_location_input);
         search=(Button)findViewById(R.id.search_in_posts);
+        back=(Button)findViewById(R.id.Backbtn);
 
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +51,14 @@ public class SearchPostActivity extends AppCompatActivity {
                 txtLocation=location.getText().toString();
                 Intent intent =new Intent(SearchPostActivity.this,postsFeedActivity.class);
                 startActivity(intent);
+            }
+        });
 
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(SearchPostActivity.this,HomePageActivity.class);
+                startActivity(intent);
             }
         });
 

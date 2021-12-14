@@ -25,6 +25,7 @@ public class postsFeedActivity extends AppCompatActivity {
     private DatabaseReference databaseRef;
     private FirebaseAuth mAuth;
     private List<post> postList;
+    private List<String> postIdsList;
     private String uid;
 
 
@@ -37,6 +38,8 @@ public class postsFeedActivity extends AppCompatActivity {
         postsRecycle = findViewById(R.id.recyclePosts);
         uid=mAuth.getCurrentUser().getUid();
         postList=new ArrayList<>();
+        postIdsList=new ArrayList<>();
+
         //todo sort the post befor showing them in home page
         readPostFromFirebase();
     }
@@ -52,14 +55,16 @@ public class postsFeedActivity extends AppCompatActivity {
                     for (DataSnapshot currPost:snapshot.getChildren() ) {
                         post tempPost1 =currPost.getValue(post.class);
                         String post_id = currPost.getKey();
+                        postIdsList.add(post_id);
                         post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
-                                tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getUid());
+                                tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid());
                         postList.add(tempPost2);
 
                     }
 
                     PostAdapter adapter = new PostAdapter(postsFeedActivity.this,uid);
                     adapter.setPosts(postList);
+                    adapter.setPostsIdList(postIdsList);
                     postsRecycle.setAdapter(adapter);
                     postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
 

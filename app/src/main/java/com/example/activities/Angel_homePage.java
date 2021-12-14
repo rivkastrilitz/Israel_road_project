@@ -78,6 +78,8 @@ public class Angel_homePage extends AppCompatActivity {
             }
         });
 
+
+
         //todo override the back button
 //        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
 //            @Override
@@ -147,7 +149,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     private void addOffer(final String address, final String fromdate, String todate,final String capacity,final String restrictions) {
         uid=mAuth.getCurrentUser().getUid();
-        post newpost=new post(address,fromdate,todate,capacity,restrictions,uid);
+        post newpost=new post(address,fromdate,todate,capacity,restrictions,uid,"");
         databaseRef.child("HostingOffer").push().setValue(newpost).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
