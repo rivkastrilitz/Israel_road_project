@@ -7,21 +7,21 @@ public class post {
 
     private String description;
     private String imageurl;
-    private String postid;
-    private String publisher;
-    private String address,fromDate,toDate,capacity,restrictions,publisherUid;
+
+    private String postid,address,fromDate,toDate,restrictions,publisherUid,phoneNum;
+    private int capacity;
 
     public post() {
     }
 
-    public post(String description, String imageurl, String postid, String publisher) {
-        this.description = description;
-        this.imageurl = imageurl;
-        this.postid = postid;
-        this.publisher = publisher;
-    }
+//    public post(String description, String imageurl, String postid, String publisher) {
+//        this.description = description;
+//        this.imageurl = imageurl;
+//        this.postid = postid;
+//        this.publisherUid = publisher;
+//    }
 
-    public post(String Address,String fromDate,String toDate,String capacity,String restrictions,String userId,String postid){
+    public post(String Address,String fromDate,String toDate,int capacity,String restrictions,String userId,String postid,String phoneNum){
         this.address=Address;
         this.fromDate=fromDate;
         this.toDate=toDate;
@@ -29,6 +29,7 @@ public class post {
         this.restrictions=restrictions;
         this.publisherUid=userId;
         this.postid=postid;
+        this.phoneNum=phoneNum;
 
     }
     //copy constructor
@@ -39,6 +40,7 @@ public class post {
         this.capacity=p.getCapacity();
         this.restrictions=p.getRestrictions();
         this.publisherUid=p.getpublisherUid();
+        this.phoneNum= p.phoneNum;
     }
 
     public String getDescription() {
@@ -61,23 +63,11 @@ public class post {
         return postid;
     }
 
-    public void setPostid(String postid) {
-        this.postid = postid;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
     public String getAddress() {
         return address;
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
@@ -97,7 +87,7 @@ public class post {
         this.address = address;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
@@ -114,7 +104,12 @@ public class post {
     }
 
     public String getpublisherUid() {
-        return publisherUid;
+        return this.publisherUid;
     }
 
+    public String getPhoneNum(){return this.phoneNum;}
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
 }

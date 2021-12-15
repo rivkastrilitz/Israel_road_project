@@ -7,15 +7,15 @@
     tools:context=".PostShapeActivity">
 
 
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_width="408dp"
+        android:layout_height="418dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="322dp"
-            android:layout_height="wrap_content"
+            android:layout_width="347dp"
+            android:layout_height="330dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="40dp"
@@ -83,6 +83,45 @@
                 app:layout_constraintTop_toBottomOf="@+id/PostFromDateRight" />
 
             <TextView
+                android:id="@+id/PostCapacityRight"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="restrictions"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/txtPostToDate"
+                app:layout_constraintTop_toBottomOf="@+id/PostToDateRight" />
+
+            <TextView
+                android:id="@+id/PostRestrictionsRight"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="capacity"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/txtPostToDate"
+                app:layout_constraintTop_toBottomOf="@+id/PostCapacityRight" />
+
+            <TextView
+                android:id="@+id/PostPhoneNumRight"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="phoneNum"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/txtPostToDate"
+                app:layout_constraintTop_toBottomOf="@+id/PostRestrictionsRight" />
+
+            <TextView
                 android:id="@+id/txtPostAdress"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
@@ -118,28 +157,48 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPostFromDate" />
 
-            <Button
-                android:id="@+id/btnseedetails"
-                android:layout_width="103dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="#FFFFFF"
-                android:text="See More Details"
-                android:textColor="#268BBC"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.07"
+            <TextView
+                android:id="@+id/txtCapacity"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/capacity"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPostToDate" />
+
+            <TextView
+                android:id="@+id/txtRestrictions"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/restrictions"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCapacity" />
+
+            <TextView
+                android:id="@+id/txtPhoneNum"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/phoneNum"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRestrictions" />
+
 
             <Button
                 android:id="@+id/deleteAOffer"
-                android:layout_width="103dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="136dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="38dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#FFFFFF"
                 android:text="@string/DeleteHostingOffer"
@@ -147,15 +206,15 @@
                 android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.929"
+                app:layout_constraintHorizontal_bias="0.838"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
                 app:layout_constraintVertical_bias="1.0" />
 
             <Button
-                android:id="@+id/invitePlace"
-                android:layout_width="103dp"
-                android:layout_height="38dp"
+                android:id="@+id/reservePlace"
+                android:layout_width="136dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#FFFFFF"
@@ -164,7 +223,7 @@
                 android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.072"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
                 app:layout_constraintVertical_bias="1.0" />

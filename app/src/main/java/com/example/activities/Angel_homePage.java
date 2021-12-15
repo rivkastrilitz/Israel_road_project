@@ -37,7 +37,7 @@ public class Angel_homePage extends AppCompatActivity {
     private DatabaseReference databaseRef;
 
     private String uid = "";
-    private EditText AngelAddress,fromDate,toDate,capacity,restrictions;
+    private EditText AngelAddress,fromDate,toDate,capacity,restrictions,phoneNum;
     private Button createOffer,deleteOffer ;
     private ActionBar actionBar;
 
@@ -57,6 +57,7 @@ public class Angel_homePage extends AppCompatActivity {
         toDate=(EditText)findViewById(R.id.post_toDate);
         capacity=(EditText)findViewById(R.id.post_capacity);
         restrictions=(EditText)findViewById(R.id.post_restrictions);
+        phoneNum=(EditText)findViewById(R.id.post_phoneNum);
         createOffer=(Button)findViewById(R.id.createOffer);
         deleteOffer=(Button)findViewById(R.id.deleteOffer);
 
@@ -68,11 +69,12 @@ public class Angel_homePage extends AppCompatActivity {
                 String txtAngelAddress = AngelAddress.getText().toString().trim();
                 String txtFromDate=fromDate.getText().toString();
                 String txtToDate=toDate.getText().toString();
-                String txtCapacity=capacity.getText().toString();
+                int txtCapacity=Integer.parseInt(capacity.getText().toString());
                 String txtRestrictions=restrictions.getText().toString();
+                String txtPhoneNum=phoneNum.getText().toString();
 
                 if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity)) {
-                    addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions);
+                    addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
                 }
 
             }
@@ -147,9 +149,9 @@ public class Angel_homePage extends AppCompatActivity {
 
     }
 
-    private void addOffer(final String address, final String fromdate, String todate,final String capacity,final String restrictions) {
+    private void addOffer(final String address, final String fromdate, String todate,final int capacity,final String restrictions,final  String phoneNum) {
         uid=mAuth.getCurrentUser().getUid();
-        post newpost=new post(address,fromdate,todate,capacity,restrictions,uid,"");
+        post newpost=new post(address,fromdate,todate,capacity,restrictions,uid,"",phoneNum);
         databaseRef.child("HostingOffer").push().setValue(newpost).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -168,7 +170,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     }
 
-    private boolean checkValidation(final String txtAngelAddress,final String txtFromDate,final String txtToDate,final String txtCapacity){
+    private boolean checkValidation(final String txtAngelAddress,final String txtFromDate,final String txtToDate,final int txtCapacity){
 
         if(txtAngelAddress.isEmpty())
         {
@@ -177,7 +179,7 @@ public class Angel_homePage extends AppCompatActivity {
             return false;
 
         }
-        if(txtCapacity.isEmpty())
+        if(txtCapacity==0)
         {
             capacity.setError("capacity is empty");
             capacity.requestFocus();

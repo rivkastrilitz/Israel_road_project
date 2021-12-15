@@ -57,7 +57,7 @@ public class postsFeedActivity extends AppCompatActivity {
                         String post_id = currPost.getKey();
                         postIdsList.add(post_id);
                         post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
-                                tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid());
+                                tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(),tempPost1.getPhoneNum());
                         postList.add(tempPost2);
 
                     }
@@ -66,7 +66,7 @@ public class postsFeedActivity extends AppCompatActivity {
                     adapter.setPosts(postList);
                     adapter.setPostsIdList(postIdsList);
                     postsRecycle.setAdapter(adapter);
-                    postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
+                    postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this,1));
 
                 }
             }

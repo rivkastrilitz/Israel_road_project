@@ -67,6 +67,15 @@
             android:layout_marginRight="4pt"
             android:hint="@string/restrictions" />
 
+        <EditText
+            android:id="@+id/post_phoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/phoneNum" />
+
 
         <Button
             android:id="@+id/createOffer"

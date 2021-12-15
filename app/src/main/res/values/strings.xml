@@ -16,13 +16,14 @@
 
     //Angel
     <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
-    <string name="DeleteHostingOffer">מחק הצעת אירוח קיימת </string>
+    <string name="DeleteHostingOffer">מחק הצעת אירוח זו </string>
     <string name="address">כתובת  </string>
     <string name="capacity">כמות מקסימלית לאכלוס  </string>
     <string name="fromdate">מתאריך  </string>
     <string name="todate">עד תאריך  </string>
     <string name="restrictions">הגבלות והערות  </string>
     <string name="Contact">צור קשר </string>
+    <string name="phoneNum">מספר טלפון </string>
     <string name="addOffer">הצע אירוח</string>
     <string name="myOffer">ההצעות שלי</string>
     <!-- TODO: Remove or change this placeholder text -->

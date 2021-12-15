@@ -1,7 +1,6 @@
 package com.example.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.activities.R;
-import com.example.activities.postMoreDeatailsActivity;
 import com.example.model.post;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +22,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context context;
     String uid;
     List<post> PostList;
-    private List<String> postIdsList;
+    List<String> postIdsList;
+    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+
 
     public PostAdapter(Context context,String uid){
         this.context = context;
@@ -40,17 +42,44 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //todo set text to publisher name or something else .
+        //String postPublisheruid=PostList.get(position).getpublisherUid();
 
+        holder.txtNameAngel.setText(PostList.get(position).getpublisherUid());
         holder.txtAddress.setText(PostList.get(position).getAddress());
         holder.txtFromDate.setText(PostList.get(position).getFromDate());
         holder.txtToDate.setText(PostList.get(position).getToDate());
+        holder.txtCapacity.setText(Integer.toString(PostList.get(position).getCapacity()));
+        holder.txtRestrictions.setText(PostList.get(position).getRestrictions());
+        holder.txtPhoneNum.setText(PostList.get(position).getPhoneNum());
+        //int selectedItem = position;
 
-        holder.btnSeeMoreDetails.setOnClickListener(view -> {
-            Intent intent = new Intent(context, postMoreDeatailsActivity.class);
-            intent.putExtra("user_id",uid);
-           // intent.putExtra("post_id",PostList.get(position).);
-            context.startActivity(intent);
-        });
+//        holder.btnDeleteOffer.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                //only the user that published this post can delete it
+//                if (uid == PostList.get(selectedItem).getpublisherUid()) {
+//
+//                    databaseRef.child("HostingOffers").child(postIdsList.get(selectedItem)).getRef().removeValue();
+//                    notifyDataSetChanged();
+//
+//
+//                }
+//            }
+//
+//        });
+
+//        holder.btnReservePlace.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int currCapacity=PostList.get(selectedItem).getCapacity();
+//                int updateCapacity=currCapacity-getNumOfReservation();
+//                databaseRef.child("HostingOffers").child(PostList.get(selectedItem).getPostid()).getRef().setValue(updateCapacity);
+//
+//            }
+//        });
+
 
     }
 
@@ -69,27 +98,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    //todo
+    public int getNumOfReservation(){
+        return -1;
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtAddress,txtFromDate,txtToDate,txtCapacity, txtRestrictions;
-        private Button btnSeeMoreDetails;
+        private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtRestrictions,txtPhoneNum;
+        private Button  btnDeleteOffer,btnReservePlace;
         private CardView parent;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-          // txtNameAssociation = itemView.findViewById(R.id.nameMessage);
+            txtNameAngel = itemView.findViewById(R.id.nameMessage);
             txtAddress = itemView.findViewById(R.id.PostAdressRight);
             txtFromDate = itemView.findViewById(R.id.PostFromDateRight);
             txtToDate = itemView.findViewById(R.id.PostToDateRight);
+            txtCapacity=itemView.findViewById(R.id.PostCapacityRight);
+            txtRestrictions=itemView.findViewById(R.id.PostRestrictionsRight);
+            txtPhoneNum=itemView.findViewById(R.id.PostPhoneNumRight);
 
             parent = itemView.findViewById(R.id.parent);
-            btnSeeMoreDetails = itemView.findViewById(R.id.btnseedetails);
+            btnDeleteOffer=itemView.findViewById(R.id.deleteAOffer);
+            btnReservePlace=itemView.findViewById(R.id.reservePlace);
+
+
 
 
 
         }
     }
+
+
 
 
 }
