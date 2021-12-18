@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -28,6 +29,7 @@ public class postsFeedActivity extends AppCompatActivity {
     private List<String> postIdsList;
     private List<String> publisherNamesList;
     private String uid;
+
 
 
     @Override
@@ -82,6 +84,7 @@ public class postsFeedActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void SortOffersByDate(List<post> list){
 

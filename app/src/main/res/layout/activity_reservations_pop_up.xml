@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReservationsPopUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".reservation">
+
+        <EditText
+            android:id="@+id/txtReservation"
+            android:layout_width="177dp"
+            android:layout_height="83dp"
+            android:hint="@string/enter_reservation"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            android:inputType="number"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+        <Button
+            android:id="@+id/reserve"
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:text="@string/reserve"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="279dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

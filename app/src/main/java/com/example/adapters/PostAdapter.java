@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.activities.R;
+import com.example.activities.ReservationsPopUpActivity;
 import com.example.activities.restrictionsPopUpActivity;
 import com.example.model.post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
 
+
+
     public PostAdapter(Context context,String uid){
         this.context = context;
         this.uid=uid;
@@ -44,6 +48,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_post_shape, parent, false);
         ViewHolder holder= new ViewHolder(view);
         mAuth = FirebaseAuth.getInstance();
+
         return new ViewHolder(view);
 
     }
@@ -75,15 +80,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         //todo button of undo reservation
         holder.btnReservePlace.setOnClickListener(v-> {
-                int currCapacity=PostList.get(position).getCapacity();
-                int updateCapacity=currCapacity-getNumOfReservation();
-                //update capacity in list
-                PostList.get(position).setCapacity(updateCapacity);
-                if(updateCapacity>=0){
-                    holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
-                }else{
-                    Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
-                }
+            int currCapacity=PostList.get(position).getCapacity();
+            Intent intent=new Intent(context, ReservationsPopUpActivity.class);
+            intent.putExtra("capacity", currCapacity);
+            context.startActivity(intent);
+
+            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(uid).get());
+            int numOfReservation=Integer.parseInt(reservationsNum);
+            int updateCapacity=currCapacity-numOfReservation;
+            //update capacity in list
+            PostList.get(position).setCapacity(updateCapacity);
+            if(updateCapacity>=0){
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+            }else{
+                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
+            }
 
 
         });
@@ -121,9 +132,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     //todo
-    public int getNumOfReservation(){
-        return 1;
-    }
+//    public int getNumOfReservation(){
+//      String reservationsNum =String.valueOf(String.valueOf(holderdatabaseRef.child("Reservations").child(uid).get()));
+//      return Integer.parseInt(reservationsNum);
+//    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -133,8 +145,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         DatabaseReference databaseRef;
 
 
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             txtNameAngel = itemView.findViewById(R.id.nameMessage);
             txtAddress = itemView.findViewById(R.id.PostAdressRight);
             txtFromDate = itemView.findViewById(R.id.PostFromDateRight);
@@ -147,8 +162,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             btnDeleteOffer=itemView.findViewById(R.id.deleteAOffer);
             btnReservePlace=itemView.findViewById(R.id.reservePlace);
             btnRestrictions=itemView.findViewById(R.id.btnRestrictions);
-
             databaseRef=FirebaseDatabase.getInstance().getReference();
+
+
+
 
 
 

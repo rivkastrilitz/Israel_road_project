@@ -27,9 +27,6 @@ public class restrictionsPopUpActivity extends AppCompatActivity {
         txtRestrictions=findViewById(R.id.PostRestrictions);
         txtRestrictions.setText(getRestrictions());
 
-
-
-
     }
 
     public String getRestrictions(){
