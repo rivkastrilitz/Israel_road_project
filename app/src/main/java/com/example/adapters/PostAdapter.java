@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.activities.Angel_homePage;
 import com.example.activities.HomePageActivity;
 import com.example.activities.R;
+import com.example.activities.User_Login;
 import com.example.model.post;
 import com.example.model.user;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,10 +71,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.btnDeleteOffer.setOnClickListener(v-> {
             //only the user that published this post can delete it
             if (mAuth.getCurrentUser().getUid().equals( PostList.get(position).getpublisherUid())){
-                holder.databaseRef.child("HostingOffers").child(postIdsList.get(position)).removeValue();
-                notifyDataSetChanged();
-
-
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).getRef().removeValue();
+                Toast.makeText(context,"offer removed", Toast.LENGTH_SHORT).show();
             }
         });
 
