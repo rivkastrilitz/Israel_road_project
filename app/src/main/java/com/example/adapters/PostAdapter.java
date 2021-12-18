@@ -1,6 +1,7 @@
 package com.example.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.activities.Angel_homePage;
+import com.example.activities.HomePageActivity;
 import com.example.activities.R;
 import com.example.model.post;
+import com.example.model.user;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -23,7 +32,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     String uid;
     List<post> PostList;
     List<String> postIdsList;
-    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+    List<String> publisherNamesList;
+    private FirebaseAuth mAuth;
+
 
 
 
@@ -36,14 +47,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_post_shape, parent, false);
         ViewHolder holder= new ViewHolder(view);
+        mAuth = FirebaseAuth.getInstance();
         return new ViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //todo set text to publisher name or something else .
-        //String postPublisheruid=PostList.get(position).getpublisherUid();
+        //todo chek why not working  .
+        holder.txtNameAngel.setText(publisherNamesList.get(position));
 
         holder.txtNameAngel.setText(PostList.get(position).getpublisherUid());
         holder.txtAddress.setText(PostList.get(position).getAddress());
@@ -52,33 +64,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtCapacity.setText(Integer.toString(PostList.get(position).getCapacity()));
         holder.txtRestrictions.setText(PostList.get(position).getRestrictions());
         holder.txtPhoneNum.setText(PostList.get(position).getPhoneNum());
-        //int selectedItem = position;
 
-//        holder.btnDeleteOffer.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                //only the user that published this post can delete it
-//                if (uid == PostList.get(selectedItem).getpublisherUid()) {
-//
-//                    databaseRef.child("HostingOffers").child(postIdsList.get(selectedItem)).getRef().removeValue();
-//                    notifyDataSetChanged();
-//
-//
-//                }
-//            }
-//
-//        });
 
-//        holder.btnReservePlace.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int currCapacity=PostList.get(selectedItem).getCapacity();
-//                int updateCapacity=currCapacity-getNumOfReservation();
-//                databaseRef.child("HostingOffers").child(PostList.get(selectedItem).getPostid()).getRef().setValue(updateCapacity);
-//
-//            }
-//        });
+        holder.btnDeleteOffer.setOnClickListener(v-> {
+            //only the user that published this post can delete it
+            if (mAuth.getCurrentUser().getUid().equals( PostList.get(position).getpublisherUid())){
+                holder.databaseRef.child("HostingOffers").child(postIdsList.get(position)).removeValue();
+                notifyDataSetChanged();
+
+
+            }
+        });
+
+
+        holder.btnReservePlace.setOnClickListener(v-> {
+                int currCapacity=PostList.get(position).getCapacity();
+                int updateCapacity=currCapacity-getNumOfReservation();
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+
+        });
 
 
     }
@@ -98,9 +102,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void setPublishersNameList(List<String> publisherNamesList){
+        this.publisherNamesList = publisherNamesList;
+        notifyDataSetChanged();
+    }
+
+
+
     //todo
     public int getNumOfReservation(){
-        return -1;
+        return 1;
     }
 
 
@@ -108,6 +119,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtRestrictions,txtPhoneNum;
         private Button  btnDeleteOffer,btnReservePlace;
         private CardView parent;
+        DatabaseReference databaseRef;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -123,6 +135,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             parent = itemView.findViewById(R.id.parent);
             btnDeleteOffer=itemView.findViewById(R.id.deleteAOffer);
             btnReservePlace=itemView.findViewById(R.id.reservePlace);
+
+            databaseRef=FirebaseDatabase.getInstance().getReference();
 
 
 

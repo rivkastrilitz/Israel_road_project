@@ -26,6 +26,7 @@ public class postsFeedActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private List<post> postList;
     private List<String> postIdsList;
+    private List<String> publisherNamesList;
     private String uid;
 
 
@@ -39,6 +40,7 @@ public class postsFeedActivity extends AppCompatActivity {
         uid=mAuth.getCurrentUser().getUid();
         postList=new ArrayList<>();
         postIdsList=new ArrayList<>();
+        publisherNamesList=new ArrayList<>();
 
         //todo sort the post befor showing them in home page
         readPostFromFirebase();
@@ -53,18 +55,20 @@ public class postsFeedActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     postList.clear();
                     for (DataSnapshot currPost:snapshot.getChildren() ) {
-                        post tempPost1 =currPost.getValue(post.class);
                         String post_id = currPost.getKey();
                         postIdsList.add(post_id);
+                        post tempPost1 =currPost.getValue(post.class);
                         post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
                                 tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(),tempPost1.getPhoneNum());
                         postList.add(tempPost2);
-
+                        String publisherName = snapshot.child("Users").child(tempPost2.getpublisherUid()).child("name").getValue(String.class);
+                        publisherNamesList.add(publisherName);
                     }
 
                     PostAdapter adapter = new PostAdapter(postsFeedActivity.this,uid);
                     adapter.setPosts(postList);
                     adapter.setPostsIdList(postIdsList);
+                    adapter.setPublishersNameList(publisherNamesList);
                     postsRecycle.setAdapter(adapter);
                     postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this,1));
 
@@ -86,5 +90,7 @@ public class postsFeedActivity extends AppCompatActivity {
     private void SortOfferByLocation(List<post>list){
 
     }
+
+
 
 }
