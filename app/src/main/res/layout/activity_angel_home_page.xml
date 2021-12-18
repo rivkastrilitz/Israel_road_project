@@ -89,17 +89,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.862" />
 
-        <Button
-            android:id="@+id/deleteOffer"
-            android:layout_width="198dp"
-            android:layout_height="50dp"
-            android:text="@string/DeleteHostingOffer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.638"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.954" />
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"

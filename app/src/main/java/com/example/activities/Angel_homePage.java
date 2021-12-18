@@ -38,7 +38,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     private String uid = "";
     private EditText AngelAddress,fromDate,toDate,capacity,restrictions,phoneNum;
-    private Button createOffer,deleteOffer ;
+    private Button createOffer ;
     private ActionBar actionBar;
 
 
@@ -59,7 +59,7 @@ public class Angel_homePage extends AppCompatActivity {
         restrictions=(EditText)findViewById(R.id.post_restrictions);
         phoneNum=(EditText)findViewById(R.id.post_phoneNum);
         createOffer=(Button)findViewById(R.id.createOffer);
-        deleteOffer=(Button)findViewById(R.id.deleteOffer);
+
 
 
         createOffer.setOnClickListener(new View.OnClickListener(){
@@ -73,25 +73,13 @@ public class Angel_homePage extends AppCompatActivity {
                 String txtRestrictions=restrictions.getText().toString();
                 String txtPhoneNum=phoneNum.getText().toString();
 
-                if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity)) {
+                if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtPhoneNum)) {
                     addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
                 }
 
             }
         });
 
-
-
-        //todo override the back button
-//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-//            @Override
-//            public void handleOnBackPressed() {
-//                Intent intent = new Intent(Angel_homePage.this, HomePageActivity.class);
-//                startActivity(intent);
-//                finish();
-//
-//            }
-//        };
 
 
 
@@ -170,7 +158,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     }
 
-    private boolean checkValidation(final String txtAngelAddress,final String txtFromDate,final String txtToDate,final int txtCapacity){
+    private boolean checkValidation(final String txtAngelAddress,final String txtFromDate,final String txtToDate,final int txtCapacity ,final String txtPhoneNum){
 
         if(txtAngelAddress.isEmpty())
         {
@@ -193,6 +181,19 @@ public class Angel_homePage extends AppCompatActivity {
             return false;
 
         }
+
+        if(txtPhoneNum.isEmpty()) {
+            phoneNum.setError("you must add contact");
+            fromDate.requestFocus();
+            return false;
+        }
+        if(txtPhoneNum.length()<11){
+            phoneNum.setError("phone number must be a 10 digits number");
+            fromDate.requestFocus();
+            return false;
+        }
+
+
 
         String [] arrFromDate=txtFromDate.split("/");
         String [] arrtoDate=txtFromDate.split("/");

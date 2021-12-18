@@ -88,7 +88,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="restrictions"
+                android:text=" capacity"
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -97,16 +97,16 @@
 
             <TextView
                 android:id="@+id/PostRestrictionsRight"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
+                android:layout_width="103dp"
+                android:layout_height="33dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="capacity"
+                android:text="restrictions"
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/txtPostToDate"
-                app:layout_constraintTop_toBottomOf="@+id/PostCapacityRight" />
+                app:layout_constraintTop_toBottomOf="@+id/PostPhoneNumRight" />
 
             <TextView
                 android:id="@+id/PostPhoneNumRight"
@@ -119,7 +119,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/txtPostToDate"
-                app:layout_constraintTop_toBottomOf="@+id/PostRestrictionsRight" />
+                app:layout_constraintTop_toBottomOf="@+id/PostCapacityRight" />
 
             <TextView
                 android:id="@+id/txtPostAdress"
@@ -170,18 +170,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate" />
 
             <TextView
-                android:id="@+id/txtRestrictions"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/restrictions"
-                android:textAlignment="viewStart"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtCapacity" />
-
-            <TextView
                 android:id="@+id/txtPhoneNum"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
@@ -191,8 +179,7 @@
                 android:textAlignment="viewStart"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtRestrictions" />
-
+                app:layout_constraintTop_toBottomOf="@+id/txtCapacity" />
 
             <Button
                 android:id="@+id/deleteAOffer"
@@ -228,8 +215,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
                 app:layout_constraintVertical_bias="1.0" />
 
+            <Button
+                android:id="@+id/btnRestrictions"
+                android:layout_width="103dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#2196F3"
+                android:text="@string/restrictions"
+                android:textColor="#303A3E"
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.177"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhoneNum"
+                app:layout_constraintVertical_bias="0.0"
+
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

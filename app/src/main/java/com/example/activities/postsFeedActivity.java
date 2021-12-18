@@ -61,7 +61,7 @@ public class postsFeedActivity extends AppCompatActivity {
                         post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
                                 tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(),tempPost1.getPhoneNum());
                         postList.add(tempPost2);
-                        String publisherName = snapshot.child("Users").child(tempPost2.getpublisherUid()).child("name").getValue(String.class);
+                        String publisherName = databaseRef.child("Users").child(tempPost2.getpublisherUid()).child("name").get().toString();
                         publisherNamesList.add(publisherName);
                     }
 
