@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import android.widget.Toast;
@@ -29,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.time.Year;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class Angel_homePage extends AppCompatActivity {
@@ -37,8 +41,9 @@ public class Angel_homePage extends AppCompatActivity {
     private DatabaseReference databaseRef;
 
     private String uid = "";
-    private EditText AngelAddress,fromDate,toDate,capacity,restrictions,phoneNum;
-    private Button createOffer ;
+    private EditText AngelAddress,capacity,restrictions,phoneNum;
+    private Button createOffer ,fromDate,toDate ;
+    private DatePickerDialog datePickerDialog;
     private ActionBar actionBar;
 
 
@@ -53,12 +58,17 @@ public class Angel_homePage extends AppCompatActivity {
 
 
         AngelAddress=(EditText)findViewById(R.id.post_address);
-        fromDate=(EditText)findViewById(R.id.post_fromDate);
-        toDate=(EditText)findViewById(R.id.post_toDate);
+        fromDate=(Button) findViewById(R.id.fromdatePickerButton);
+        toDate=(Button) findViewById(R.id.todatePickerButton);
         capacity=(EditText)findViewById(R.id.post_capacity);
         restrictions=(EditText)findViewById(R.id.post_restrictions);
         phoneNum=(EditText)findViewById(R.id.post_phoneNum);
         createOffer=(Button)findViewById(R.id.createOffer);
+
+        initDatePicker();
+        fromDate.setText(getTodaysDate());
+        toDate.setText(getTodaysDate());
+
 
 
 
@@ -67,6 +77,7 @@ public class Angel_homePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String txtAngelAddress = AngelAddress.getText().toString().trim();
+
                 String txtFromDate=fromDate.getText().toString();
                 String txtToDate=toDate.getText().toString();
                 int txtCapacity=Integer.parseInt(capacity.getText().toString());
@@ -205,6 +216,47 @@ public class Angel_homePage extends AppCompatActivity {
         }
 
         return true;
+
+    }
+
+    public void openDatePicker(View view) {
+        datePickerDialog.show();
+    }
+
+    private String getTodaysDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return day + "/" + month + "/" + year;
+    }
+
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = makeDateString(day, month, year);
+                fromDate.setText(date);
+                toDate.setText(date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+        //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
     }
 

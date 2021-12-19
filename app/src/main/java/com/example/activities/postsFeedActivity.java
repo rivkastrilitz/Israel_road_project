@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.adapters.PostAdapter;
+import com.example.comperators.sortByFromDate;
 import com.example.model.post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class postsFeedActivity extends AppCompatActivity {
@@ -46,6 +48,7 @@ public class postsFeedActivity extends AppCompatActivity {
         publisherNamesList=new ArrayList<>();
 
         //todo sort the post befor showing them in home page
+        SortOffersByFromDate();
         readPostFromFirebase();
     }
 
@@ -87,8 +90,8 @@ public class postsFeedActivity extends AppCompatActivity {
     }
 
 
-    private void SortOffersByDate(List<post> list){
-
+    private void SortOffersByFromDate(){
+        Collections.sort(postList,new sortByFromDate());
 
     }
     private void SortOfferByLocation(List<post>list){
