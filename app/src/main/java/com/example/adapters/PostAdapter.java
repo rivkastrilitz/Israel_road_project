@@ -32,6 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     List<String> postIdsList;
     List<String> publisherNamesList;
     private FirebaseAuth mAuth;
+    int currCapacity;
 
 
 
@@ -78,26 +79,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         });
 
+
         //todo button of undo reservation
         holder.btnReservePlace.setOnClickListener(v-> {
-            int currCapacity=PostList.get(position).getCapacity();
+            currCapacity=PostList.get(position).getCapacity();
             Intent intent=new Intent(context, ReservationsPopUpActivity.class);
             intent.putExtra("capacity", currCapacity);
             context.startActivity(intent);
 
-            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(uid).get());
-            int numOfReservation=Integer.parseInt(reservationsNum);
-            int updateCapacity=currCapacity-numOfReservation;
-            //update capacity in list
-            PostList.get(position).setCapacity(updateCapacity);
-            if(updateCapacity>=0){
-                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
-            }else{
-                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
-            }
-
-
+//            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).get());
+//            int numOfReservation=Integer.parseInt(reservationsNum);
+//            int updateCapacity=currCapacity-numOfReservation;
+//            //update capacity in list
+//            PostList.get(position).setCapacity(updateCapacity);
+//            if(updateCapacity>=0){
+//                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+//            }else{
+//                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
+//            }
         });
+
+
 
         holder.btnRestrictions.setOnClickListener(v->{
             Intent intent=new Intent(context, restrictionsPopUpActivity.class);
@@ -131,6 +133,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
 
+
+
     //todo
 //    public int getNumOfReservation(){
 //      String reservationsNum =String.valueOf(String.valueOf(holderdatabaseRef.child("Reservations").child(uid).get()));
@@ -140,7 +144,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtPhoneNum,txtRestrictions;
-        private Button  btnDeleteOffer,btnReservePlace,btnRestrictions;
+        private Button  btnDeleteOffer,btnReservePlace,btnRestrictions ;
         private CardView parent;
         DatabaseReference databaseRef;
 
@@ -163,6 +167,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             btnReservePlace=itemView.findViewById(R.id.reservePlace);
             btnRestrictions=itemView.findViewById(R.id.btnRestrictions);
             databaseRef=FirebaseDatabase.getInstance().getReference();
+
 
 
 
