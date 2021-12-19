@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Israel_road">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeNo"/>
+        <activity
+            android:name=".restrictionsPopUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".postsFeedActivity"
             android:exported="false" />
         <activity

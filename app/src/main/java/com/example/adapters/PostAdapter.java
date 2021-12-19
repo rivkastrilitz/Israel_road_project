@@ -7,22 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.activities.Angel_homePage;
-import com.example.activities.HomePageActivity;
 import com.example.activities.R;
+import com.example.activities.restrictionsPopUpActivity;
 import com.example.model.post;
-import com.example.model.user;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -54,7 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //todo chek why not working  .
+        //todo chek why not working .
         holder.txtNameAngel.setText(publisherNamesList.get(position));
 
         holder.txtNameAngel.setText(PostList.get(position).getpublisherUid());
@@ -69,19 +65,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.btnDeleteOffer.setOnClickListener(v-> {
             //only the user that published this post can delete it
             if (mAuth.getCurrentUser().getUid().equals( PostList.get(position).getpublisherUid())){
-                holder.databaseRef.child("HostingOffers").child(postIdsList.get(position)).removeValue();
-                notifyDataSetChanged();
-
-
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).getRef().removeValue();
+                Toast.makeText(context,"offer removed", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context,"you cant remove offer that you didn't post", Toast.LENGTH_SHORT).show();
             }
+
         });
 
-
+        //todo button of undo reservation
         holder.btnReservePlace.setOnClickListener(v-> {
                 int currCapacity=PostList.get(position).getCapacity();
                 int updateCapacity=currCapacity-getNumOfReservation();
-                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+                //update capacity in list
+                PostList.get(position).setCapacity(updateCapacity);
+                if(updateCapacity>=0){
+                    holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+                }else{
+                    Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
+                }
 
+
+        });
+
+        holder.btnRestrictions.setOnClickListener(v->{
+            Intent intent=new Intent(context, restrictionsPopUpActivity.class);
+            String restrictions=PostList.get(position).getRestrictions();
+            intent.putExtra("restrictions", restrictions);
+            context.startActivity(intent);
         });
 
 
@@ -116,8 +127,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtRestrictions,txtPhoneNum;
-        private Button  btnDeleteOffer,btnReservePlace;
+        private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtPhoneNum,txtRestrictions;
+        private Button  btnDeleteOffer,btnReservePlace,btnRestrictions;
         private CardView parent;
         DatabaseReference databaseRef;
 
@@ -135,6 +146,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             parent = itemView.findViewById(R.id.parent);
             btnDeleteOffer=itemView.findViewById(R.id.deleteAOffer);
             btnReservePlace=itemView.findViewById(R.id.reservePlace);
+            btnRestrictions=itemView.findViewById(R.id.btnRestrictions);
 
             databaseRef=FirebaseDatabase.getInstance().getReference();
 

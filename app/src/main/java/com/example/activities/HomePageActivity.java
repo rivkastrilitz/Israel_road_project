@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.adapters.PostAdapter;
 import com.example.fragments.AngelHomeFragment;
+import com.example.fragments.ChatListFragment;
 import com.example.fragments.profileFragment;
 import com.example.model.post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +40,8 @@ public class HomePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        ////////////////////////////////////////////////
         addOffer=findViewById(R.id.addOffers);
         searchOffer=findViewById(R.id.serchOffers);
         welcome=(TextView)findViewById(R.id.TextWelcome);
@@ -67,51 +70,59 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        //////////////////////////////////////
 
 
 
 
 
-//        actionBar = getSupportActionBar();
-//
-//        BottomNavigationView navigationView = findViewById(R.id.navigation);
-//        navigationView.setOnItemSelectedListener(selectedListener);
-//
-//        actionBar.setTitle("Home");
-//        AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//        ft1.replace(R.id.content, angelHomeFragment, "");
-//        ft1.commit();
+        actionBar = getSupportActionBar();
+
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnItemSelectedListener(selectedListener);
+
+        actionBar.setTitle("Home");
+        AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
+        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+        ft1.replace(R.id.content, angelHomeFragment, "");
+        ft1.commit();
 
 
 
     }
 
-//    private NavigationBarView.OnItemSelectedListener selectedListener =
-//            new NavigationBarView.OnItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    switch (item.getItemId()){
-//                        case R.id.nav_home:
-//                            actionBar.setTitle("Home");
-//                            AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//                            ft1.replace(R.id.content, angelHomeFragment, "");
-//                            ft1.commit();
+    private NavigationBarView.OnItemSelectedListener selectedListener =
+            new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.nav_home:
+                            actionBar.setTitle("Home");
+                            AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
+                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+                            ft1.replace(R.id.content, angelHomeFragment, "");
+                            ft1.commit();
+                            return true;
+                        case R.id.nav_profile:
+                            actionBar.setTitle("Profile");
+                            profileFragment profileFragment = new profileFragment();
+                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+                            ft2.replace(R.id.content, profileFragment, "");
+                            ft2.commit();
+                            return true;
+                        case R.id.nav_chat:
+                            actionBar.setTitle("Chats");
+                            ChatListFragment chatListFragment = new ChatListFragment();
+                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+                            ft3.replace(R.id.content, chatListFragment, "");
+                            ft3.commit();
+                            return true;
+//                        case R.id.nav_user:
 //                            return true;
-//                        case R.id.nav_profile:
-//                            actionBar.setTitle("Profile");
-//                            profileFragment profileFragment = new profileFragment();
-//                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-//                            ft2.replace(R.id.content, profileFragment, "");
-//                            ft2.commit();
-//                            return true;
-////                        case R.id.nav_user:
-////                            return true;
-//                    }
-//                    return false;
-//                }
-//            };
+                    }
+                    return false;
+                }
+            };
 
     public void getUserName(){
         Intent intent=getIntent();
