@@ -40,28 +40,32 @@ public class ReservationsPopUpActivity extends AppCompatActivity {
         reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ChekValidation(reservation);
+
                String reservation=reservationNum.getText().toString();
-               Intent intent =new Intent(ReservationsPopUpActivity.this,postsFeedActivity.class);
-                databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).setValue(reservation);
-                startActivity(intent);
+               if(ChekValidation(reservation)){
+                   Intent intent =new Intent(ReservationsPopUpActivity.this,postsFeedActivity.class);
+                   databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).setValue(reservation);
+                   intent.putExtra("Pause",false);
+                   startActivity(intent);
+                   finish();
+               }
+
             }
         });
 
 
     }
 
-    //todo check why not working
-    public void ChekValidation(String reservation){
+
+    public boolean ChekValidation(String reservation){
 
         if(Integer.parseInt(reservation)>capacity){
             reservationNum.setError("cant reserve more then the capacity");
             reservationNum.requestFocus();
-            return;
+            return false;
         }
 
-
-
+        return true;
     }
 
     public void getCapacity(){

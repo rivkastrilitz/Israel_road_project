@@ -32,6 +32,7 @@ public class postsFeedActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,8 @@ public class postsFeedActivity extends AppCompatActivity {
     private void SortOfferByLocation(List<post>list){
 
     }
+
+
 
 
 

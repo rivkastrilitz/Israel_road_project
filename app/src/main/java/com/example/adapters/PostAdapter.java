@@ -2,6 +2,7 @@ package com.example.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     List<String> publisherNamesList;
     private FirebaseAuth mAuth;
     int currCapacity;
-
-
 
 
 
@@ -87,6 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             intent.putExtra("capacity", currCapacity);
             context.startActivity(intent);
 
+
 //            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).get());
 //            int numOfReservation=Integer.parseInt(reservationsNum);
 //            int updateCapacity=currCapacity-numOfReservation;
@@ -97,6 +97,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //            }else{
 //                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
 //            }
+
+
         });
 
 
@@ -133,13 +135,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
 
-
-
-    //todo
-//    public int getNumOfReservation(){
-//      String reservationsNum =String.valueOf(String.valueOf(holderdatabaseRef.child("Reservations").child(uid).get()));
-//      return Integer.parseInt(reservationsNum);
-//    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{

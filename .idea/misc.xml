@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_angel_home_page.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_angel_homepage.xml" value="0.264" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_angel_login.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_chat.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_home_page.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_login.xml" value="0.1609375" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
@@ -22,6 +23,8 @@
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_traveler_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_user_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/activity_user_registration.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/fragment_chat_list.xml" value="0.2115036231884058" />
+        <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/fragment_profile.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/pop_up_window.xml" value="0.1" />
       </map>
     </option>
