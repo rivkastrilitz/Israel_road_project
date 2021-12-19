@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.activities.ChatActivity;
 import com.example.activities.R;
 import com.example.activities.restrictionsPopUpActivity;
 import com.example.model.post;
@@ -81,6 +82,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 PostList.get(position).setCapacity(updateCapacity);
                 if(updateCapacity>=0){
                     holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    context.startActivity(intent);
                 }else{
                     Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
                 }
