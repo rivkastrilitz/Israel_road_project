@@ -6,47 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".SearchPostActivity">
 
+
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="256dp"
-        android:layout_height="42dp"
-        android:rotationX="4"
-        android:rotationY="-4"
-        android:text="הכנס פרטים לחיפוש מלאך"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117"
-        tools:visibility="visible" />
+        android:id="@+id/searchOfferHeadLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/searchOfferHeadLine"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:gravity="center"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="16dp" />
 
-    <EditText
-        android:id="@+id/Traveler_location_input"
-        android:layout_width="224dp"
-        android:layout_height="47dp"
-        android:hint="@string/location"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="408dp"
 
-    <EditText
-        android:id="@+id/Traveler_date_input"
-        android:layout_width="232dp"
-        android:layout_height="49dp"
-        android:hint="@string/date"
+        android:layout_height="412dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.222"
+        tools:context=".SearchPostActivity"
+        tools:layout_editor_absoluteX="3dp"
+        tools:ignore="MissingConstraints">
 
+
+
+        <TextView
+            android:id="@+id/post_fromDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:ems="10"
+            android:textColor="@color/black"
+            android:hint="@string/fromdate"
+            android:inputType="date"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/fromdatePickerButton"
+            style="?android:spinnerStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="openDatePicker"
+            android:text="01 01 2020"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginRight="-75dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_fromDate" />
+
+
+        <TextView
+            android:id="@+id/post_toDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:textColor="@color/black"
+            android:ems="10"
+            android:hint="@string/todate"
+            android:inputType="date"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/todatePickerButton"
+            style="?android:spinnerStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="openDatePicker"
+            android:text="01 01 2020"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginRight="-75dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_toDate" />
+
+        <EditText
+            android:id="@+id/Traveler_location_input"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="-75dp"
+            android:textSize="20sp"
+            android:hint="@string/location" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_in_posts"

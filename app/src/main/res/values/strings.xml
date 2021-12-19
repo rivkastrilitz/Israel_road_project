@@ -44,5 +44,8 @@
     <string name="enter_reservation">"הכנס מספר מקומות שתרצה לשמור"</string>
     <string name="reserve">"שמור"</string>
 
+    <string name="searchOfferHeadLine">"search for hosting offer"</string>
+
+
 
 </resources>
