@@ -39,9 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/anton"
         android:text="@string/welcome"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.725"
@@ -62,7 +64,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.161"
-        android:drawableLeft="@drawable/ic_add_post"
+        android:drawableLeft="@drawable/ic_add"
+
         />
 
     <Button
@@ -88,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:drawableLeft="@drawable/ic_search"
         app:layout_constraintVertical_bias="0.161" />
 
 

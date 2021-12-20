@@ -7,11 +7,22 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:layout_width="317dp"
+        android:layout_height="66dp"
+        android:fontFamily="@font/bevan"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="126dp" />
+
     <Button
         android:id="@+id/login"
         android:layout_width="146dp"
         android:layout_height="62dp"
         android:text="@string/login"
+        android:drawableLeft="@drawable/ic_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -26,6 +37,7 @@
         android:layout_width="139dp"
         android:layout_height="59dp"
         android:text="@string/signUp"
+        android:drawableLeft="@drawable/ic_signUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
