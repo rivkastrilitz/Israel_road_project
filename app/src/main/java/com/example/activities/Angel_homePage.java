@@ -41,6 +41,7 @@ public class Angel_homePage extends AppCompatActivity {
     private DatabaseReference databaseRef;
 
     private String uid = "";
+    private String usertype = "";
     private EditText AngelAddress,capacity,restrictions,phoneNum;
     private Button createOffer ,fromDate,toDate ;
     private DatePickerDialog datePickerDialog;
@@ -83,9 +84,14 @@ public class Angel_homePage extends AppCompatActivity {
                 int txtCapacity=Integer.parseInt(capacity.getText().toString());
                 String txtRestrictions=restrictions.getText().toString();
                 String txtPhoneNum=phoneNum.getText().toString();
-
+                getusertype();
                 if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtPhoneNum)) {
-                    addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
+                    if(usertype.equals("angel")|| usertype.equals("Angel")){
+                        addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
+                    }else{
+                        Toast.makeText(Angel_homePage.this,"Traveler cant add Hosting offer",Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
@@ -144,6 +150,16 @@ public class Angel_homePage extends AppCompatActivity {
         if(UidFromLogin != null)
         {
             uid = UidFromLogin.getString("Uid");
+        }
+
+    }
+
+    public void getusertype(){
+        Intent intent=getIntent();
+        Bundle usertypeFromLogin = intent.getExtras();
+        if(usertypeFromLogin != null)
+        {
+            usertype = usertypeFromLogin.getString("Uid");
         }
 
     }

@@ -79,6 +79,7 @@ public class User_Login extends AppCompatActivity {
                                         //sent currUser id and name to next activity
                                         intent.putExtra("Uid", uid);
                                         intent.putExtra("name",currUser.getName());
+                                        intent.putExtra("type",currUser.getType());
                                         startActivity(intent);
                                         finish();
 
