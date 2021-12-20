@@ -1,36 +1,36 @@
 <resources>
     <string name="app_name">israel_road</string>
-    <string name="login">התחברות</string>
-    <string name="Username">שם משתמש</string>
-    <string name="password">סיסמא </string>
-    <string name="signUp">הרשם </string>
-    <string name="name">שם </string>
-    <string name="welcome">ברוך הבא  %1$s </string>
-    <string name="mainHeadLine">ברוכים הבאים ל israel_road</string>
+    <string name="login">Login</string>
+    <string name="Username">User name</string>
+    <string name="password">Password </string>
+    <string name="signUp">SignUp </string>
+    <string name="name">name </string>
+    <string name="welcome"> welcome %1$s </string>
+    <string name="mainHeadLine"> Israel_Road</string>
 
-    <string name="UserType">הכנס סוג משתמש מלאך או מטייל </string>
-    <string name="ForgotMyPassword">שכחתי סיסמא </string>
-    <string name="Search">חיפוש  </string>
-    <string name="location"> מיקום </string>
-    <string name="date">תאריך </string>
+    <string name="UserType">enter user type angel/traveler </string>
+    <string name="ForgotMyPassword">forgot password </string>
+    <string name="Search">search </string>
+    <string name="location"> location </string>
+    <string name="date">date </string>
 
     //Angel
-    <string name="PostHostingOffer">צור הצעת אירוח חדשה </string>
-    <string name="DeleteHostingOffer">מחק הצעת אירוח זו </string>
-    <string name="address">כתובת  </string>
-    <string name="capacity">כמות מקסימלית לאכלוס  </string>
-    <string name="fromdate">מתאריך  </string>
-    <string name="todate">עד תאריך  </string>
-    <string name="restrictions">הגבלות והערות  </string>
-    <string name="Contact">צור קשר </string>
-    <string name="phoneNum">מספר טלפון </string>
-    <string name="addOffer">הצע אירוח</string>
-    <string name="myOffer">ההצעות שלי</string>
+    <string name="PostHostingOffer">create new hosting offer </string>
+    <string name="DeleteHostingOffer">delete this offer </string>
+    <string name="address">address  </string>
+    <string name="capacity">capacity  </string>
+    <string name="fromdate">start date  </string>
+    <string name="todate">end date  </string>
+    <string name="restrictions">restrictions and notes  </string>
+    <string name="Contact">contact </string>
+    <string name="phoneNum">phonNum </string>
+    <string name="addOffer">offer</string>
+    <string name="myOffer">my offer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     //postShape
-    <string name="invite">הזמן מקומות</string>
+    <string name="invite">reserve</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -41,8 +41,8 @@
     <string name="login_failed">"Login failed"</string>
 
     //reservation popup window
-    <string name="enter_reservation">"הכנס מספר מקומות שתרצה לשמור"</string>
-    <string name="reserve">"שמור"</string>
+    <string name="enter_reservation">"enter num of reservations"</string>
+    <string name="reserve">"reserve"</string>
 
     <string name="searchOfferHeadLine">"search for hosting offer"</string>
 

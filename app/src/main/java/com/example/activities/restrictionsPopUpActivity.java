@@ -25,17 +25,17 @@ public class restrictionsPopUpActivity extends AppCompatActivity {
         getWindow().setLayout((int)(width*.6),(int)(height*.6));
 
         txtRestrictions=findViewById(R.id.PostRestrictions);
-        txtRestrictions.setText(getRestrictions());
+        getRestrictions();
+        txtRestrictions.setText(restrictions);
 
     }
 
-    public String getRestrictions(){
+    public void getRestrictions(){
         Intent intent=getIntent();
         Bundle restrictionsFromPostFeed = intent.getExtras();
         if(restrictionsFromPostFeed != null)
         {
             restrictions= restrictionsFromPostFeed.getString("restrictions");
         }
-        return restrictions;
     }
 }

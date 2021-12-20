@@ -3,6 +3,7 @@ package com.example.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,14 @@ import com.example.activities.ChatActivity;
 import com.example.activities.R;
 import com.example.activities.ReservationsPopUpActivity;
 import com.example.activities.restrictionsPopUpActivity;
+import com.example.comperators.sortByFromDate;
 import com.example.model.post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -83,22 +87,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //todo button of undo reservation
         holder.btnReservePlace.setOnClickListener(v-> {
             currCapacity=PostList.get(position).getCapacity();
-            Intent intent=new Intent(context, ReservationsPopUpActivity.class);
-            intent.putExtra("capacity", currCapacity);
-            context.startActivity(intent);
-            Intent intent_chat = new Intent(context, ChatActivity.class); context.startActivity(intent_chat);
-
+//            Intent intent=new Intent(context, ReservationsPopUpActivity.class);
+//            intent.putExtra("capacity", currCapacity);
+//            intent.putExtra("postList", (Serializable) PostList);
+//            intent.putExtra("postIdList", (Serializable) postIdsList);
+//            intent.putExtra("position", position);
+//            context.startActivity(intent);
 
 //            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).get());
 //            int numOfReservation=Integer.parseInt(reservationsNum);
-//            int updateCapacity=currCapacity-numOfReservation;
-//            //update capacity in list
-//            PostList.get(position).setCapacity(updateCapacity);
-//            if(updateCapacity>=0){
-//                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
-//            }else{
-//                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
-//            }
+            int updateCapacity=currCapacity-1;
+            //update capacity in list
+            PostList.get(position).setCapacity(updateCapacity);
+            if(updateCapacity>=0){
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+            }else{
+                Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
+            }
 
 
         });
@@ -111,6 +116,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             intent.putExtra("restrictions", restrictions);
             context.startActivity(intent);
         });
+
+        holder.btnChat.setOnClickListener(v->{
+            Intent intentChat =new Intent(context,ChatActivity.class);
+            context.startActivity(intentChat);
+        });
+
+
 
 
     }
@@ -141,7 +153,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView txtAddress,txtFromDate,txtToDate,txtNameAngel,txtCapacity,txtPhoneNum,txtRestrictions;
-        private Button  btnDeleteOffer,btnReservePlace,btnRestrictions ;
+        private Button  btnDeleteOffer,btnReservePlace,btnRestrictions ,btnChat ;
         private CardView parent;
         DatabaseReference databaseRef;
 
@@ -163,6 +175,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             btnDeleteOffer=itemView.findViewById(R.id.deleteAOffer);
             btnReservePlace=itemView.findViewById(R.id.reservePlace);
             btnRestrictions=itemView.findViewById(R.id.btnRestrictions);
+            btnChat=itemView.findViewById(R.id.btnChat);
             databaseRef=FirebaseDatabase.getInstance().getReference();
 
 

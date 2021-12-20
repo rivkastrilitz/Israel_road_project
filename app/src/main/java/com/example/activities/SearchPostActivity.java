@@ -61,6 +61,7 @@ public class SearchPostActivity extends AppCompatActivity {
                 txtToDate=todate.getText().toString();
                 txtLocation=location.getText().toString();
                 Intent intent =new Intent(SearchPostActivity.this,postsFeedActivity.class);
+                intent.putExtra("fromdate",txtFromDate);
                 startActivity(intent);
             }
         });

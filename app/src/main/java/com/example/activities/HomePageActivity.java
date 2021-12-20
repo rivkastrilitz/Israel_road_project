@@ -46,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
         searchOffer=findViewById(R.id.serchOffers);
         welcome=(TextView)findViewById(R.id.TextWelcome);
         getUserName();
-        welcome.setText( "ברוך הבא "+userName);
+        welcome.setText( "welcome "+userName);
 
         postsRecycle = findViewById(R.id.recyclePosts);
         mAuth = FirebaseAuth.getInstance();

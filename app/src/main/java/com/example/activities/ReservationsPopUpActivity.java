@@ -8,11 +8,15 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.adapters.PostAdapter;
+import com.example.model.post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class ReservationsPopUpActivity extends AppCompatActivity {
 
@@ -21,6 +25,11 @@ public class ReservationsPopUpActivity extends AppCompatActivity {
     int capacity=0;
     private DatabaseReference databaseRef;
     private FirebaseAuth mAuth;
+    List<post> PostList;
+    List<String> postIdsList;
+    int position;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +45,9 @@ public class ReservationsPopUpActivity extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         getCapacity();
+        getPostList();
+        getPostIdList();
+        getPosition();
 
         reserve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +57,17 @@ public class ReservationsPopUpActivity extends AppCompatActivity {
                if(ChekValidation(reservation)){
                    Intent intent =new Intent(ReservationsPopUpActivity.this,postsFeedActivity.class);
                    databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).setValue(reservation);
-                   intent.putExtra("Pause",false);
+
+                    int numOfReservation=Integer.parseInt(reservation);
+                    int updateCapacity=capacity-numOfReservation;
+                    //update capacity in list
+                    PostList.get(position).setCapacity(updateCapacity);
+                    if(updateCapacity>=0){
+                    databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+                    }else{
+                    Toast.makeText(ReservationsPopUpActivity.this,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
+                    }
+
                    startActivity(intent);
                    finish();
                }
@@ -74,6 +96,35 @@ public class ReservationsPopUpActivity extends AppCompatActivity {
         if(capacityFromPostFeed != null)
         {
             capacity= capacityFromPostFeed.getInt("capacity");
+        }
+
+    }
+    public void getPostList(){
+        Intent intent=getIntent();
+        Bundle PostListFromPostFeed = intent.getExtras();
+        if(PostListFromPostFeed != null)
+        {
+            PostList= (List<post>) PostListFromPostFeed.get("postList");
+        }
+
+    }
+
+    public void getPostIdList(){
+        Intent intent=getIntent();
+        Bundle PostIdListFromPostFeed = intent.getExtras();
+        if(PostIdListFromPostFeed != null)
+        {
+            postIdsList= (List<String>) PostIdListFromPostFeed.get("postIdList");
+        }
+
+    }
+
+    public void getPosition(){
+        Intent intent=getIntent();
+        Bundle PositionFromPostFeed = intent.getExtras();
+        if(PositionFromPostFeed != null)
+        {
+            position= PositionFromPostFeed.getInt("position");
         }
 
     }
