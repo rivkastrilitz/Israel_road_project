@@ -57,6 +57,7 @@ public class postsFeedActivity extends AppCompatActivity {
         publisherNamesList=new ArrayList<>();
         sortedPostList=new ArrayList<>();
 
+        ReadNamesFromFirebase();
         readPostFromFirebase();
     }
 
@@ -68,6 +69,9 @@ public class postsFeedActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     postList.clear();
+                    sortedPostList.clear();
+                    postIdsList.clear();
+
                     for (DataSnapshot currPost : snapshot.getChildren()) {
                         String post_id = currPost.getKey();
                         postIdsList.add(post_id);
@@ -102,6 +106,35 @@ public class postsFeedActivity extends AppCompatActivity {
 
 
         });
+
+    }
+
+    private void ReadNamesFromFirebase(){
+        databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot currUser:snapshot.getChildren()) {
+
+                    user tempUser=currUser.getValue(user.class);
+                    assert tempUser!=null;
+                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType());
+                    //for (int i = 0; i < postList.size(); i++) {
+                    //if(postList.get(i).getpublisherUid()==tempUserToList.getUid()){
+                    publisherNamesList.add(tempUserToList.getName());
+
+
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 

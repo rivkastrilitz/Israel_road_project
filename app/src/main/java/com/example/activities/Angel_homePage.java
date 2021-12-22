@@ -145,16 +145,17 @@ public class Angel_homePage extends AppCompatActivity {
 //                }
 //            };
 
-    //todo delete if redundant
-    public void getUserUid(){
+
+    public void getUserId(){
         Intent intent=getIntent();
-        Bundle UidFromLogin = intent.getExtras();
-        if(UidFromLogin != null)
+        Bundle UserIdLogin = intent.getExtras();
+        if(UserIdLogin != null)
         {
-            uid = UidFromLogin.getString("Uid");
+            uid = UserIdLogin.getString("uid");
         }
 
     }
+
     public void getUserType(){
         Intent intent=getIntent();
         Bundle getUserTypeLogin = intent.getExtras();
@@ -168,7 +169,7 @@ public class Angel_homePage extends AppCompatActivity {
 
 
     private void addOffer(final String address, final String fromdate, String todate,final int capacity,final String restrictions,final  String phoneNum) {
-        uid=mAuth.getCurrentUser().getUid();
+        getUserId();
         post newpost=new post(address,fromdate,todate,capacity,restrictions,uid,"",phoneNum);
         databaseRef.child("HostingOffer").push().setValue(newpost).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

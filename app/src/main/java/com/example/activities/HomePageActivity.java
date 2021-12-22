@@ -58,7 +58,9 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent   =new Intent(HomePageActivity.this,Angel_homePage.class);
                 getUserType();
+                getUserId();
                 intent.putExtra("type",usertype);
+                intent.putExtra("uid",uid);
                 startActivity(intent);
                 finish();
             }
@@ -143,6 +145,16 @@ public class HomePageActivity extends AppCompatActivity {
         if(getUserTypeLogin != null)
         {
             usertype = getUserTypeLogin.getString("type");
+        }
+
+    }
+
+    public void getUserId(){
+        Intent intent=getIntent();
+        Bundle UserIdFromLogin = intent.getExtras();
+        if(UserIdFromLogin != null)
+        {
+            uid= UserIdFromLogin.getString("Uid");
         }
 
     }
