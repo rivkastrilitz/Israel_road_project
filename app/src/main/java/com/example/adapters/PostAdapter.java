@@ -1,6 +1,8 @@
 package com.example.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -39,6 +41,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     List<String> publisherNamesList;
     private FirebaseAuth mAuth;
     int currCapacity;
+    AlertDialog.Builder builder;
 
 
 
@@ -70,12 +73,35 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtRestrictions.setText(PostList.get(position).getRestrictions());
         holder.txtPhoneNum.setText(PostList.get(position).getPhoneNum());
 
-
+        int pos=position;
         holder.btnDeleteOffer.setOnClickListener(v-> {
             //only the user that published this post can delete it
-            if (mAuth.getCurrentUser().getUid().equals( PostList.get(position).getpublisherUid())){
-                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).getRef().removeValue();
-                Toast.makeText(context,"offer removed", Toast.LENGTH_SHORT).show();
+            if (mAuth.getCurrentUser().getUid().equals( PostList.get(pos).getpublisherUid())){
+                //dialog
+
+                builder.setTitle("remove offer").setMessage("are you sure you want to delete this offer")
+                    .setCancelable(true).setPositiveButton("delete",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).getRef().removeValue();
+                        Toast.makeText(context,"offer removed", Toast.LENGTH_SHORT).show();
+                    }
+
+                }).setNegativeButton("cancel",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+
+
+                AlertDialog alterdialod = builder.create();
+                alterdialod.show();
+
+
             }else{
                 Toast.makeText(context,"you cant remove offer that you didn't post", Toast.LENGTH_SHORT).show();
             }
@@ -177,6 +203,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             btnRestrictions=itemView.findViewById(R.id.btnRestrictions);
             btnChat=itemView.findViewById(R.id.btnChat);
             databaseRef=FirebaseDatabase.getInstance().getReference();
+
+            builder = new AlertDialog.Builder(context);
 
 
 

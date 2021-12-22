@@ -2,13 +2,16 @@ package com.example.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.model.user;
@@ -25,9 +28,11 @@ import java.util.HashMap;
 
 public class User_registration extends AppCompatActivity {
     private Button btn2_signup;
-    private EditText user_name,name, pass_word ,user_type ;
+    private EditText user_name,name, pass_word ;
+    private Spinner user_type;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
+
 
 
 
@@ -44,8 +49,10 @@ public class User_registration extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         databaseRef = FirebaseDatabase.getInstance().getReference();
 
-
-
+        ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(User_registration.this,
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Type));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        user_type.setAdapter(myAdapter);
         btn2_signup.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -53,7 +60,7 @@ public class User_registration extends AppCompatActivity {
 
                 String txtUser_name = user_name.getText().toString().trim();
                 String txtPassword= pass_word.getText().toString().trim();
-                String txtType=user_type.getText().toString().trim();
+                String txtType=user_type.getSelectedItem().toString().trim();
                 String txtName=name.getText().toString().trim();
 
 
