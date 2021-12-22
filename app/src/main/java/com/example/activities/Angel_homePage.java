@@ -40,8 +40,8 @@ public class Angel_homePage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
 
-    private String uid = "";
-    private String usertype = "";
+    private String uid="" ;
+    private String usertype="" ;
     private EditText AngelAddress,capacity,restrictions,phoneNum;
     private Button createOffer ,fromDate,toDate ;
     private DatePickerDialog datePickerDialog;
@@ -56,6 +56,7 @@ public class Angel_homePage extends AppCompatActivity {
         setContentView(R.layout.activity_angel_home_page);
         mAuth = FirebaseAuth.getInstance();
         databaseRef = FirebaseDatabase.getInstance().getReference();
+
 
 
         AngelAddress=(EditText)findViewById(R.id.post_address);
@@ -84,8 +85,9 @@ public class Angel_homePage extends AppCompatActivity {
                 int txtCapacity=Integer.parseInt(capacity.getText().toString());
                 String txtRestrictions=restrictions.getText().toString();
                 String txtPhoneNum=phoneNum.getText().toString();
-                getusertype();
+
                 if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtPhoneNum)) {
+                    getUserType();
                     if(usertype.equals("angel")|| usertype.equals("Angel")){
                         addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
                     }else{
@@ -144,7 +146,7 @@ public class Angel_homePage extends AppCompatActivity {
 //            };
 
     //todo delete if redundant
-    public void getAngelUid(){
+    public void getUserUid(){
         Intent intent=getIntent();
         Bundle UidFromLogin = intent.getExtras();
         if(UidFromLogin != null)
@@ -153,16 +155,17 @@ public class Angel_homePage extends AppCompatActivity {
         }
 
     }
-
-    public void getusertype(){
+    public void getUserType(){
         Intent intent=getIntent();
-        Bundle usertypeFromLogin = intent.getExtras();
-        if(usertypeFromLogin != null)
+        Bundle getUserTypeLogin = intent.getExtras();
+        if(getUserTypeLogin != null)
         {
-            usertype = usertypeFromLogin.getString("Uid");
+            usertype = getUserTypeLogin.getString("type");
         }
 
     }
+
+
 
     private void addOffer(final String address, final String fromdate, String todate,final int capacity,final String restrictions,final  String phoneNum) {
         uid=mAuth.getCurrentUser().getUid();

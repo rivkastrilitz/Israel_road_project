@@ -16,7 +16,7 @@
 
     //Angel
     <string name="PostHostingOffer">create new hosting offer </string>
-    <string name="DeleteHostingOffer">delete this offer </string>
+    <string name="DeleteHostingOffer">delete </string>
     <string name="address">address  </string>
     <string name="capacity">capacity  </string>
     <string name="fromdate">start date  </string>

@@ -20,9 +20,10 @@
             android:layout_marginTop="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="40dp"
-            android:background="#1F627A"
-            android:backgroundTint="#1F6781"
+            android:background="#C88AA3"
+            android:backgroundTint="#3CA7CD"
             android:gravity="center"
+
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
 
@@ -31,7 +32,7 @@
                 android:id="@+id/nameMessage"
                 android:layout_width="172dp"
                 android:layout_height="19dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="nameAss"
                 android:textAlignment="center"
@@ -39,9 +40,9 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.409"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:id="@+id/PostAdressRight"
@@ -98,7 +99,7 @@
             <TextView
                 android:id="@+id/PostRestrictionsRight"
                 android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="restrictions"
@@ -125,7 +126,7 @@
                 android:id="@+id/txtPostAdress"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/address"
                 android:textAlignment="viewStart"
@@ -137,7 +138,7 @@
                 android:id="@+id/txtPostFromDate"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/fromdate"
                 android:textAlignment="viewStart"
@@ -149,7 +150,7 @@
                 android:id="@+id/txtPostToDate"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/todate"
                 android:textAlignment="viewStart"
@@ -161,7 +162,7 @@
                 android:id="@+id/txtCapacity"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/capacity"
                 android:textAlignment="viewStart"
@@ -173,7 +174,7 @@
                 android:id="@+id/txtPhoneNum"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/phoneNum"
                 android:textAlignment="viewStart"
@@ -188,15 +189,16 @@
                 android:layout_marginTop="38dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#FFFFFF"
+                android:drawableLeft="@drawable/ic_delete_gray"
                 android:text="@string/DeleteHostingOffer"
                 android:textColor="#268BBC"
-                android:textSize="9sp"
+                android:textSize="6sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.932"
+                app:layout_constraintHorizontal_bias="0.852"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.875" />
 
             <Button
                 android:id="@+id/reservePlace"
@@ -210,33 +212,47 @@
                 android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.407"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPostToDate"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.884" />
 
             <Button
                 android:id="@+id/btnRestrictions"
-                android:layout_width="100dp"
-                android:layout_height="41dp"
+                android:layout_width="51dp"
+                android:layout_height="25dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#2196F3"
-                android:text="@string/restrictions"
-                android:textColor="#303A3E"
-                android:textSize="9sp"
+                android:drawableRight="@drawable/ic_more_deatails_dots"
+                android:text="more"
+                android:textColor="@color/white"
+                android:textSize="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.177"
+                app:layout_constraintHorizontal_bias="0.872"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPhoneNum"
                 app:layout_constraintVertical_bias="0.0"
 
                 />
 
+            <TextView
+                android:id="@+id/txtrestrictions"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/restrictions"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPhoneNum" />
+
             <Button
                 android:id="@+id/btnChat"
-                android:layout_width="56dp"
-                android:layout_height="49dp"
+                android:layout_width="60dp"
+                android:layout_height="53dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#F7F8F8"
@@ -245,10 +261,10 @@
                 android:textSize="9sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.148"
+                app:layout_constraintHorizontal_bias="0.065"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPhoneNum"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintVertical_bias="0.785"
 
                 />
 

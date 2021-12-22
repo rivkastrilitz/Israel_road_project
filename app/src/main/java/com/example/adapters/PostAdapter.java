@@ -63,7 +63,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //todo chek why not working .
         holder.txtNameAngel.setText(publisherNamesList.get(position));
 
-        holder.txtNameAngel.setText(PostList.get(position).getpublisherUid());
         holder.txtAddress.setText(PostList.get(position).getAddress());
         holder.txtFromDate.setText(PostList.get(position).getFromDate());
         holder.txtToDate.setText(PostList.get(position).getToDate());
@@ -96,6 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 //            String reservationsNum =String.valueOf(holder.databaseRef.child("Reservations").child(mAuth.getCurrentUser().getUid()).get());
 //            int numOfReservation=Integer.parseInt(reservationsNum);
+
             int updateCapacity=currCapacity-1;
             //update capacity in list
             PostList.get(position).setCapacity(updateCapacity);
@@ -114,6 +114,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             String restrictions=PostList.get(position).getRestrictions();
             intent.putExtra("restrictions", restrictions);
             context.startActivity(intent);
+
         });
 
         holder.btnChat.setOnClickListener(v->{

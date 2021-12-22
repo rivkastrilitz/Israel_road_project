@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.model.user;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -96,13 +97,9 @@ public class User_registration extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(UserName , Password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
             @Override
             public void onSuccess(AuthResult authResult) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("name", Name);
-                map.put("Email", UserName);
-                map.put("type", Type);
-                map.put("id", mAuth.getCurrentUser().getUid());
 
-                databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                user newUser=new user(mAuth.getCurrentUser().getUid(),Name,UserName,Type);
+                databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {

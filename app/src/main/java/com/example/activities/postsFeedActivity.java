@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.adapters.PostAdapter;
 import com.example.comperators.compareDate;
 import com.example.comperators.sortByFromDate;
 import com.example.model.post;
+import com.example.model.user;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -60,68 +62,63 @@ public class postsFeedActivity extends AppCompatActivity {
 
 
     //todo remember to delete from firebase post that their data is dew
-    private void readPostFromFirebase(){
+    private void readPostFromFirebase() {
         databaseRef.child("HostingOffer").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     postList.clear();
-                    for (DataSnapshot currPost:snapshot.getChildren() ) {
+                    for (DataSnapshot currPost : snapshot.getChildren()) {
                         String post_id = currPost.getKey();
                         postIdsList.add(post_id);
-                        post tempPost1 =currPost.getValue(post.class);
+                        post tempPost1 = currPost.getValue(post.class);
                         assert tempPost1 != null;
-                        post tempPost2=new post(tempPost1.getAddress(),tempPost1.getFromDate(),tempPost1.getToDate(),
-                                tempPost1.getCapacity(),tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(),tempPost1.getPhoneNum());
+                        post tempPost2 = new post(tempPost1.getAddress(), tempPost1.getFromDate(), tempPost1.getToDate(),
+                                tempPost1.getCapacity(), tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(), tempPost1.getPhoneNum());
                         postList.add(tempPost2);
-                        String publisherName = databaseRef.child("Users").child(tempPost2.getpublisherUid()).child("name").get().toString();
+
+                        String publisherName = databaseRef.child("Users").child(tempPost2.getpublisherUid()).getClass().toString();
+                        Toast.makeText(postsFeedActivity.this, publisherName, Toast.LENGTH_SHORT).show();
                         publisherNamesList.add(publisherName);
+
+
+                        PostAdapter adapter = new PostAdapter(postsFeedActivity.this, uid);
+                        getDatefromSearch();
+                        SortOffersByFromDate(fromDate_search);
+                        adapter.setPosts(sortedPostList);
+                        adapter.setPostsIdList(postIdsList);
+                        adapter.setPublishersNameList(publisherNamesList);
+                        postsRecycle.setAdapter(adapter);
+                        postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
+
                     }
-
-                    PostAdapter adapter = new PostAdapter(postsFeedActivity.this,uid);
-                    //todo
-//                    getDatefromSearch();
-//                    SortOffersByFromDate(fromDate_search);
-                    adapter.setPosts(postList);
-                    adapter.setPostsIdList(postIdsList);
-                    adapter.setPublishersNameList(publisherNamesList);
-                    postsRecycle.setAdapter(adapter);
-                    postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this,1));
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("firebase"," can't read posts from firebase");
+
             }
+
+
         });
 
     }
 
 
-    private void SortOffersByFromDate(String date) {
-        DateFormat dateFormat =new SimpleDateFormat("dd/mm/yyyy ");
-       // Collections.sort(postList,new sortByFromDate());
-        Date d1 =null;
-        Date d2 =null;
-        for (post p:postList) {
-            try {
-                d1=dateFormat.parse(p.getFromDate());
-                d2=dateFormat.parse(date);
-                Comparator<Date> comp=new compareDate();
-                int compareAns=comp.compare(d1,d2);
-                if(compareAns==1 || compareAns==0){
-                    sortedPostList.add(p);
-                }
+    private void SortOffersByFromDate(String from_date) {
 
-            }catch (ParseException e){
-                e.printStackTrace();
+        for (post p:postList) {
+            Comparator<String> comp=new compareDate();
+            int compareAns=comp.compare(p.getFromDate(),from_date);
+            if(compareAns==1 || compareAns==0){
+                sortedPostList.add(p);
             }
 
-
         }
+        sortedPostList.sort(new sortByFromDate());
     }
+
 
     public void getDatefromSearch(){
         Intent intent=getIntent();

@@ -31,6 +31,7 @@ public class HomePageActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private TextView welcome;
     private String userName;
+    private String usertype;
     private RecyclerView postsRecycle;
     private FirebaseAuth mAuth;
     private String uid;
@@ -56,6 +57,8 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent   =new Intent(HomePageActivity.this,Angel_homePage.class);
+                getUserType();
+                intent.putExtra("type",usertype);
                 startActivity(intent);
                 finish();
             }
@@ -130,6 +133,16 @@ public class HomePageActivity extends AppCompatActivity {
         if(nameFromLogin != null)
         {
             userName= nameFromLogin.getString("name");
+        }
+
+    }
+
+    public void getUserType(){
+        Intent intent=getIntent();
+        Bundle getUserTypeLogin = intent.getExtras();
+        if(getUserTypeLogin != null)
+        {
+            usertype = getUserTypeLogin.getString("type");
         }
 
     }
