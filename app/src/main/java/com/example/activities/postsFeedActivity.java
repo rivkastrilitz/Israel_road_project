@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.adapters.PostAdapter;
 import com.example.comperators.compareDate;
 import com.example.comperators.sortByFromDate;
+import com.example.model.AirplaneModeChangeReceiver;
 import com.example.model.post;
 import com.example.model.user;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +42,7 @@ public class postsFeedActivity extends AppCompatActivity {
     private List<String> publisherNamesList;
     private List<post>sortedPostList;
     private String uid ,fromDate_search;
-
+    AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
 
 
 
@@ -59,6 +61,18 @@ public class postsFeedActivity extends AppCompatActivity {
 
         ReadNamesFromFirebase();
         readPostFromFirebase();
+    }
+
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneModeChangeReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(airplaneModeChangeReceiver);
     }
 
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.fragments.AngelHomeFragment;
 import com.example.fragments.profileFragment;
+import com.example.model.AirplaneModeChangeReceiver;
 import com.example.model.post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +48,7 @@ public class Angel_homePage extends AppCompatActivity {
     private Button createOffer ,fromDate,toDate ;
     private DatePickerDialog datePickerDialog;
     private ActionBar actionBar;
+    AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
 
 
 
@@ -278,6 +281,18 @@ public class Angel_homePage extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
 
+    }
+
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneModeChangeReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(airplaneModeChangeReceiver);
     }
 
 }

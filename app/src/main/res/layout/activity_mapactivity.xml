@@ -13,7 +13,7 @@
         mapbox:mapbox_cameraTargetLat="31.046051"
         mapbox:mapbox_cameraTargetLng="34.851612"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
-        mapbox:mapbox_cameraZoom="12"
+        mapbox:mapbox_cameraZoom="10"
 
     />
 

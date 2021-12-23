@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.adapters.PostAdapter;
 import com.example.fragments.AngelHomeFragment;
 import com.example.fragments.ChatListFragment;
 import com.example.fragments.profileFragment;
+import com.example.model.AirplaneModeChangeReceiver;
 import com.example.model.post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -37,6 +39,8 @@ public class HomePageActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String uid;
     private List<post> postList=new ArrayList<>();
+
+    AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,6 +173,18 @@ public class HomePageActivity extends AppCompatActivity {
             uid= UserIdFromLogin.getString("Uid");
         }
 
+    }
+
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneModeChangeReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(airplaneModeChangeReceiver);
     }
 
 }
