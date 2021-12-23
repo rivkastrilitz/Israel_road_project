@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Israel_road"
         tools:ignore="ExtraText">
         <activity
+            android:name=".cahtListActivity"
+            android:exported="false" />
+        <activity
             android:name=".profileActivity"
             android:exported="false" />
         <activity

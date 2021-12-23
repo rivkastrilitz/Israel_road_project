@@ -152,7 +152,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intentMain = new Intent(this, MainActivity.class);
-        Intent intentChat = new Intent(this, ChatActivity.class);
+        Intent intentChat = new Intent(this, cahtListActivity.class);
         Intent intentProfile = new Intent(this, profileActivity.class);
 
         switch (item.getItemId()) {
