@@ -160,6 +160,9 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intentMain);
                 return true;
             case R.id.action_profile:
+                intentProfile.putExtra("name",userName);
+                intentProfile.putExtra("uid",uid);
+
                 startActivity(intentProfile);
                 return true;
             case R.id.action_chat:

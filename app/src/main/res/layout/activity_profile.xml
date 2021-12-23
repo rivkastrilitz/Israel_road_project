@@ -8,6 +8,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -22,11 +23,13 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bevan"
                 android:text="name"
                 android:textColor="@color/white"
-                android:textSize="25sp"
 
-                />
+                android:textSize="25sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -42,7 +45,8 @@
                 android:layout_marginStart="20dp"
                 android:background="@color/design_default_color_primary"
                 android:padding="5dp"
-                android:src="@drawable/ic_add_image" />
+                android:src="@drawable/ic_add_image"
+                android:onClick="imageClick" />
 
 
             <LinearLayout
@@ -51,26 +55,67 @@
                 android:orientation="vertical">
 
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/emailTv"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="5dp"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:layout_marginLeft="5dp" />-->
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/phoneTv"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="5dp"-->
-                <!--                    android:textColor="@color/white"-->
-                <!--                    android:layout_marginLeft="5dp" />-->
             </LinearLayout>
 
         </LinearLayout>
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="75dp"
+        android:layout_height="46dp"
+        android:fontFamily="@font/anton"
+        android:text="phone:"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.474"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="72dp"
+        android:layout_height="38dp"
+        android:fontFamily="@font/anton"
+        android:text="email:"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.095"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/emailToOverride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:text="email:------"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.092"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/phoneToOverride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:text="phone:------"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.238"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
