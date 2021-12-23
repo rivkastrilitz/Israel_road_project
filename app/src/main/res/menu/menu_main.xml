@@ -2,10 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_add_post"
-        android:title="Add Post"
+
+    <item android:id="@+id/action_log_out"
+        android:title="log_out"
         app:showAsAction="always"
-        android:icon="@drawable/ic_add_post"/>
+        />
+
+    <item android:id="@+id/action_profile"
+        android:title="profile"
+        app:showAsAction="always"
+    />
+
+    <item android:id="@+id/action_chat"
+        android:title="chat"
+        app:showAsAction="always"
+    />
 
 
 </menu>

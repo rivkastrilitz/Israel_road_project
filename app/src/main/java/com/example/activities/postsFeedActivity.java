@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.adapters.PostAdapter;
@@ -179,6 +181,18 @@ public class postsFeedActivity extends AppCompatActivity {
     //todo
     private void SortOfferByLocation(List<post>list){
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent =new Intent(this,MainActivity.class);
+        startActivity(intent);
+        return true;
     }
 
 

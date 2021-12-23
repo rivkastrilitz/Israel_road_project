@@ -45,14 +45,7 @@ public class AngelHomeFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-    @Override
-    public boolean onOptionsItemSelected (MenuItem menuItem){
-        int id = menuItem.getItemId();
-        if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(), AddPostActivity.class));
-        }
-        return super.onOptionsItemSelected(menuItem);
-    }
+
 
 
     @Override

@@ -51,20 +51,7 @@ public class profileFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_add_post).setVisible(false);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-    @Override
-    public boolean onOptionsItemSelected (MenuItem menuItem){
-        int id = menuItem.getItemId();
-        if(id == R.id.action_add_post){
-            startActivity(new Intent(getActivity(), AddPostActivity.class));
-        }
-        return super.onOptionsItemSelected(menuItem);
-    }
+
 
 
     @Override

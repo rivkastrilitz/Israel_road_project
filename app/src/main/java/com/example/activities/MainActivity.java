@@ -1,10 +1,13 @@
 package com.example.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.model.AirplaneModeChangeReceiver;
@@ -12,6 +15,8 @@ import com.example.model.AirplaneModeChangeReceiver;
 public class MainActivity extends AppCompatActivity {
 
     AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
+    ActionBar actionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +24,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button login_btn = findViewById(R.id.login);
 
+
         Button signup_btn = findViewById(R.id.Sign_up);
         login_btn.setOnClickListener(v-> startActivity(new Intent(this,User_Login.class )));
         signup_btn.setOnClickListener(v-> startActivity(new Intent(this,User_registration.class )));
 
+
+
     }
+
 
     protected void onStart() {
         super.onStart();

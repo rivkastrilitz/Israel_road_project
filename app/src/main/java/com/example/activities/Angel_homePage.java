@@ -12,6 +12,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -293,6 +294,18 @@ public class Angel_homePage extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         unregisterReceiver(airplaneModeChangeReceiver);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_log_out).setVisible(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent =new Intent(this,MainActivity.class);
+        startActivity(intent);
+        return true;
     }
 
 }
