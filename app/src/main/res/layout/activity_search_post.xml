@@ -7,33 +7,19 @@
     tools:context=".SearchPostActivity">
 
 
-    <TextView
-        android:id="@+id/searchOfferHeadLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/searchOfferHeadLine"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:gravity="center"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="16dp" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="408dp"
+        android:layout_width="390dp"
 
-        android:layout_height="412dp"
+        android:layout_height="326dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222"
+        app:layout_constraintVertical_bias="0.37"
         tools:context=".SearchPostActivity"
-        tools:layout_editor_absoluteX="3dp"
-        tools:ignore="MissingConstraints">
-
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp">
 
 
         <TextView
@@ -44,10 +30,11 @@
             android:layout_marginTop="10pt"
             android:layout_marginRight="4pt"
             android:ems="10"
-            android:textColor="@color/black"
             android:hint="@string/fromdate"
             android:inputType="date"
+            android:textColor="@color/black"
             android:textSize="20sp" />
+
 
         <Button
             android:id="@+id/fromdatePickerButton"
@@ -55,43 +42,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="85dp"
             android:onClick="openDatePicker"
             android:text="01 01 2020"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginRight="-75dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_fromDate" />
-
-
-        <TextView
-            android:id="@+id/post_toDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4pt"
-            android:layout_marginTop="10pt"
-            android:layout_marginRight="4pt"
-            android:textColor="@color/black"
-            android:ems="10"
-            android:hint="@string/todate"
-            android:inputType="date"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/todatePickerButton"
-            style="?android:spinnerStyle"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="openDatePicker"
-            android:text="01 01 2020"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginRight="-75dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_toDate" />
 
         <EditText
             android:id="@+id/Traveler_location_input"
@@ -106,8 +64,9 @@
 
     <Button
         android:id="@+id/search_in_posts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="127dp"
+        android:layout_height="46dp"
+        android:drawableLeft="@drawable/ic_search"
         android:text="@string/Search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,15 +90,30 @@
 
     <Button
         android:id="@+id/Backbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="128dp"
+        android:layout_height="47dp"
         android:text="Back"
+        android:drawableLeft="@drawable/ic_back_whit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.293"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.815" />
+
+    <TextView
+        android:id="@+id/searchOfferHeadLine"
+        android:layout_width="384dp"
+        android:layout_height="101dp"
+        android:ems="10"
+        android:fontFamily="@font/bevan"
+        android:gravity="center"
+        android:hint="@string/searchOfferHeadLine"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="26dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

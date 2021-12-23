@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.activities">
+    package="com.example.activities"
+    tools:ignore="CoarseFineLocation">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
 
     <application
         android:allowBackup="true"
@@ -12,20 +20,20 @@
         android:theme="@style/Theme.Israel_road"
         tools:ignore="ExtraText">
         <activity
-
+            android:name=".Mapactivity"
+            android:exported="false" />
+        <activity
             android:name=".ReservationsPopUpActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.CustomTheme"/>
-
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".ChatActivity"
             android:exported="false"
-            android:theme="@style/AppThemeNo"/>
-
+            android:theme="@style/AppThemeNo" />
         <activity
             android:name=".restrictionsPopUpActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.CustomTheme"/>
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".postsFeedActivity"
             android:exported="false" />

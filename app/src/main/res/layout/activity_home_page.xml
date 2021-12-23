@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePageActivity">
+    tools:context=".HomePageActivity"><![CDATA[
 
-    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -15,70 +15,71 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-58dp">
 
-    <FrameLayout
-        android:id="@+id/content"
+
+
+
+
+
+
+
+    ]]>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        app:menu="@menu/menu_nav"
+        tools:layout_editor_absoluteX="0dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    </FrameLayout>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/menu_nav"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/TextWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:fontFamily="@font/anton"
+        android:fontFamily="@font/bevan"
         android:text="@string/welcome"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
-
-
+        app:layout_constraintVertical_bias="0.022" />
 
     <Button
         android:id="@+id/addOffers"
         android:layout_width="119dp"
         android:layout_height="42dp"
+        android:drawableLeft="@drawable/ic_add"
         android:text="@string/addOffer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161"
-        android:drawableLeft="@drawable/ic_add"
+        app:layout_constraintVertical_bias="0.1"
 
         />
 
     <Button
-        android:id="@+id/MyOffers"
+        android:id="@+id/Mymap"
         android:layout_width="119dp"
         android:layout_height="42dp"
-        android:text="@string/myOffer"
+        android:text="map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161"
+        app:layout_constraintVertical_bias="0.1"
 
         />
 
@@ -86,13 +87,28 @@
         android:id="@+id/serchOffers"
         android:layout_width="119dp"
         android:layout_height="42dp"
+        android:drawableLeft="@drawable/ic_search"
         android:text="@string/Search"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:drawableLeft="@drawable/ic_search"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="310dp"
+        android:layout_height="447dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/israel_road"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

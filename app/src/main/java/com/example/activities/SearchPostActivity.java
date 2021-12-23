@@ -34,7 +34,7 @@ import java.util.List;
 public class SearchPostActivity extends AppCompatActivity {
 
     private EditText location;
-    private Button search ,back,fromdate ,todate;
+    private Button search ,back,fromdate;
     private String txtFromDate,txtToDate,txtLocation;
     private DatePickerDialog datePickerDialog;
 
@@ -44,21 +44,20 @@ public class SearchPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_post);
         fromdate=(Button) findViewById(R.id.fromdatePickerButton);
-        todate=(Button)findViewById(R.id.todatePickerButton);
+
         location=(EditText) findViewById(R.id.Traveler_location_input);
         search=(Button)findViewById(R.id.search_in_posts);
         back=(Button)findViewById(R.id.Backbtn);
 
         initDatePicker();
         fromdate.setText(getTodaysDate());
-        todate.setText(getTodaysDate());
+
 
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 txtFromDate=fromdate.getText().toString();
-                txtToDate=todate.getText().toString();
                 txtLocation=location.getText().toString();
                 Intent intent =new Intent(SearchPostActivity.this,postsFeedActivity.class);
                 intent.putExtra("fromdate",txtFromDate);
@@ -103,7 +102,7 @@ public class SearchPostActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 fromdate.setText(date);
-                todate.setText(date);
+
             }
         };
 

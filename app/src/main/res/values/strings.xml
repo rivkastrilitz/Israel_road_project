@@ -45,12 +45,15 @@
     <string name="reserve">"reserve"</string>
 
     <string name="searchOfferHeadLine">"search for hosting offer"</string>
-    
+
     <string-array name="Type">
         <item>Angel</item>
         <item>Traveler</item>
     </string-array>
 
+    //access token to mapbox
+
+    <string name="access_token">"pk.eyJ1Ijoicml2a2Etc3RyaWxpdHMiLCJhIjoiY2t4aHhnM2hpMTgyazJwbnA1bWs4ODJ2MCJ9.pBy19NCGVQjbxKK0GShBRw"</string>
 
 
 </resources>

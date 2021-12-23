@@ -44,8 +44,12 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //mapbox dependencies
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.5.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
 
 
 

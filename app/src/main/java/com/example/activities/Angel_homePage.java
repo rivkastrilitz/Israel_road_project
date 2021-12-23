@@ -88,7 +88,7 @@ public class Angel_homePage extends AppCompatActivity {
 
                 if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtPhoneNum)) {
                     getUserType();
-                    if(usertype.equals("angel")|| usertype.equals("Angel")){
+                    if(usertype.equals("Angel")){
                         addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
                     }else{
                         Toast.makeText(Angel_homePage.this,"Traveler cant add Hosting offer",Toast.LENGTH_SHORT).show();
