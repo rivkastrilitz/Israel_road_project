@@ -197,7 +197,7 @@ public class HomePageActivity extends AppCompatActivity {
         Bundle UserIdFromLogin = intent.getExtras();
         if(UserIdFromLogin != null)
         {
-            uid= UserIdFromLogin.getString("Uid");
+            uid= UserIdFromLogin.getString("uid");
         }
 
     }

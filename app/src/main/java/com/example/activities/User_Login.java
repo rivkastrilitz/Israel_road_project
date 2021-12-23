@@ -77,7 +77,7 @@ public class User_Login extends AppCompatActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                                         //sent currUser id and name to next activity
-                                        intent.putExtra("Uid", uid);
+                                        intent.putExtra("uid", uid);
                                         intent.putExtra("name",currUser.getName());
                                         intent.putExtra("type",currUser.getType());
                                         startActivity(intent);

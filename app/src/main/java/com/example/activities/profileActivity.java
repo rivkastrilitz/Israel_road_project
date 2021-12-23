@@ -1,26 +1,38 @@
 package com.example.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.model.user;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +41,13 @@ public class profileActivity extends AppCompatActivity {
 
     private String userName;
     private String usertype;
-    private FirebaseAuth mAuth;
     private String uid;
     private TextView txtVname ,txtVphone,txtVemail;
     private DatabaseReference databaseRef;
     private List<user> usersList;
-    StorageReference mStorgeRef;
+    private StorageReference mStorgeRef;
+    private ImageView img;
+    public Uri imguri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +56,16 @@ public class profileActivity extends AppCompatActivity {
         txtVname=findViewById(R.id.username);
         txtVphone=findViewById(R.id.phoneToOverride);
         txtVemail=findViewById(R.id.emailToOverride);
+        img =findViewById(R.id.avatarIv);
         databaseRef = FirebaseDatabase.getInstance().getReference();
+        mStorgeRef = FirebaseStorage.getInstance().getReference().child("profile_pic/"+uid);
         usersList=new ArrayList<>();
         getUserId();
         getUserName();
+        txtVname.setText(userName);
 
 //        ReadNamesFromFirebase();
-//        txtVname.setText(userName);
+//
 //        for (user u:usersList) {
 //           if(u.getUid()==uid){
 //              txtVemail.setText(u.getEmail());
@@ -58,9 +74,45 @@ public class profileActivity extends AppCompatActivity {
 //        }
 
 
+        mStorgeRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                try {
+                    final File localFile = File.createTempFile(uid,"");
+                    mStorgeRef.getFile(localFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                                    final Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                    img.setImageBitmap(bitmap);
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+                }
+                catch (IOException e){
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // File not found
+
+            }
+        });
+
+
 
 
     }
+
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,7 +184,13 @@ public class profileActivity extends AppCompatActivity {
 
     }
 
-    public void imageClick(View view) {
 
+    public void imageClick(View view) {
+        Intent intent =new Intent(profileActivity.this,EditProfileActiviry.class);
+        intent.putExtra("uid",uid);
+        intent.putExtra("name",userName);
+        startActivity(intent);
     }
+
+
 }
