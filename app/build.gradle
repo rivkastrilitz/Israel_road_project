@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
 
     //images
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
 
 
 

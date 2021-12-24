@@ -57,11 +57,12 @@ public class profileActivity extends AppCompatActivity {
         txtVphone=findViewById(R.id.phoneToOverride);
         txtVemail=findViewById(R.id.emailToOverride);
         img =findViewById(R.id.avatarIv);
+        getUserId();
+        getUserName();
         databaseRef = FirebaseDatabase.getInstance().getReference();
         mStorgeRef = FirebaseStorage.getInstance().getReference().child("profile_pic/"+uid);
         usersList=new ArrayList<>();
-        getUserId();
-        getUserName();
+
         txtVname.setText(userName);
 
 //        ReadNamesFromFirebase();
@@ -79,11 +80,9 @@ public class profileActivity extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 try {
                     final File localFile = File.createTempFile(uid,"");
-                    mStorgeRef.getFile(localFile)
-                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    mStorgeRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-
                                     final Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                                     img.setImageBitmap(bitmap);
 

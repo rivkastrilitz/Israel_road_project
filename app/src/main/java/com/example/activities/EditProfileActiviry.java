@@ -187,7 +187,8 @@ public class EditProfileActiviry extends AppCompatActivity {
                                                     Toast.LENGTH_SHORT)
                                             .show();
                                     Intent intent1 = new Intent(EditProfileActiviry.this, profileActivity.class);
-                                    intent1.putExtra("id",user_id);
+                                    intent1.putExtra("uid",user_id);
+                                    intent1.putExtra("name",userName);
                                     startActivity(intent1);
                                 }
                             })
