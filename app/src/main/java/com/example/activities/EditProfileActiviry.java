@@ -41,7 +41,7 @@ public class EditProfileActiviry extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageReference;
     AlertDialog.Builder builder;
-    String user_id ,userName;
+    String user_id ,userName ,email ,phoneNum ,usertype;
 
 
     @Override
@@ -51,6 +51,9 @@ public class EditProfileActiviry extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         getUserId();
         getUserName();
+        getEmail();
+        getUserType();
+        getPhoneNum();
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
@@ -91,6 +94,9 @@ public class EditProfileActiviry extends AppCompatActivity {
                 Intent intent1 = new Intent(EditProfileActiviry.this, profileActivity.class);
                 intent1.putExtra("uid",user_id);
                 intent1.putExtra("name",userName);
+                intent1.putExtra("email",email);
+                intent1.putExtra("phone",phoneNum);
+                intent1.putExtra("type",usertype);
                 startActivity(intent1);
             }
         });
@@ -189,6 +195,10 @@ public class EditProfileActiviry extends AppCompatActivity {
                                     Intent intent1 = new Intent(EditProfileActiviry.this, profileActivity.class);
                                     intent1.putExtra("uid",user_id);
                                     intent1.putExtra("name",userName);
+                                    intent1.putExtra("email",email);
+                                    intent1.putExtra("phone",phoneNum);
+                                    intent1.putExtra("type",usertype);
+
                                     startActivity(intent1);
                                 }
                             })
@@ -246,6 +256,35 @@ public class EditProfileActiviry extends AppCompatActivity {
         if(name != null)
         {
             userName= name.getString("name");
+        }
+
+    }
+
+    public void getEmail(){
+        Intent intent=getIntent();
+        Bundle Email = intent.getExtras();
+        if(Email != null)
+        {
+            email= Email.getString("email");
+        }
+
+    }
+    public void getPhoneNum(){
+        Intent intent=getIntent();
+        Bundle PhoneNum = intent.getExtras();
+        if(PhoneNum != null)
+        {
+            phoneNum= PhoneNum.getString("phone");
+        }
+
+    }
+
+    public void getUserType(){
+        Intent intent=getIntent();
+        Bundle getUserTypeLogin = intent.getExtras();
+        if(getUserTypeLogin != null)
+        {
+            usertype = getUserTypeLogin.getString("type");
         }
 
     }

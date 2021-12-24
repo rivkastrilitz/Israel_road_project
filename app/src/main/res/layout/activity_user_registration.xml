@@ -38,6 +38,15 @@
             android:layout_marginRight="4pt"
             android:hint="@string/name" />
 
+        <EditText
+            android:id="@+id/registration_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginRight="4pt"
+            android:hint="@string/phoneNum" />
+
         <Spinner
             android:id="@+id/registration_UserType"
             android:layout_width="match_parent"

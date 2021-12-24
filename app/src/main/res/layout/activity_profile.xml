@@ -28,8 +28,78 @@
                 android:fontFamily="@font/bevan"
                 android:text="name"
                 android:textColor="@color/white"
-
                 android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="74dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="162dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="114dp"
+                android:layout_marginEnd="175dp"
+                android:layout_marginBottom="36dp"
+                android:fontFamily="@font/bevan"
+                android:text="Email :"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/emailToOverride"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="242dp"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="115dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/bevan"
+                android:text="email---"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="160dp"
+                android:layout_marginTop="150dp"
+                android:fontFamily="@font/bevan"
+                android:text="Phone:"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/phoneToOverride"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/bevan"
+                android:text="phone---"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="150dp"
+                tools:ignore="MissingConstraints" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -44,9 +114,9 @@
                 android:layout_height="120dp"
                 android:layout_marginStart="20dp"
                 android:background="@color/design_default_color_primary"
+                android:onClick="imageClick"
                 android:padding="5dp"
-                android:src="@drawable/ic_add_image"
-                android:onClick="imageClick" />
+                android:src="@drawable/ic_add_image" />
 
 
             <LinearLayout
@@ -61,61 +131,31 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="75dp"
-        android:layout_height="46dp"
-        android:fontFamily="@font/anton"
-        android:text="phone:"
-        android:textColor="@color/black"
+    <Button
+        android:id="@+id/edit_user_deatails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_details"
+        android:drawableLeft="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.499" />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="72dp"
-        android:layout_height="38dp"
-        android:fontFamily="@font/anton"
-        android:text="email:"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.095"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/emailToOverride"
+    <Button
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="email:------"
-        android:textColor="@color/black"
+        android:drawableLeft="@drawable/ic_back_whit"
+        android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.092"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/phoneToOverride"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/anton"
-        android:text="phone:------"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.238"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

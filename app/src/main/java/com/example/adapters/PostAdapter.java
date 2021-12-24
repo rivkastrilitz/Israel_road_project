@@ -57,13 +57,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ViewHolder holder= new ViewHolder(view);
         mAuth = FirebaseAuth.getInstance();
 
+
+
         return new ViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //todo chek why not working .
+
         holder.txtNameAngel.setText(publisherNamesList.get(position));
 
         holder.txtAddress.setText(PostList.get(position).getAddress());
@@ -72,6 +74,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtCapacity.setText(Integer.toString(PostList.get(position).getCapacity()));
         holder.txtRestrictions.setText(PostList.get(position).getRestrictions());
         holder.txtPhoneNum.setText(PostList.get(position).getPhoneNum());
+
+        //todo
+        if(PostList.size()==0){
+            Toast.makeText(context,"there is no hosting offers for this date ",Toast.LENGTH_SHORT).show();
+        }
+
 
         int pos=position;
         holder.btnDeleteOffer.setOnClickListener(v-> {

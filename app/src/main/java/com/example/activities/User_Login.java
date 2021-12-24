@@ -80,6 +80,7 @@ public class User_Login extends AppCompatActivity {
                                         intent.putExtra("uid", uid);
                                         intent.putExtra("name",currUser.getName());
                                         intent.putExtra("type",currUser.getType());
+                                        intent.putExtra("email",txtEmail);
                                         startActivity(intent);
                                         finish();
 

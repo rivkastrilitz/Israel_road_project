@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.model.AirplaneModeChangeReceiver;
@@ -30,7 +31,7 @@ public class HomePageActivity extends AppCompatActivity {
     private Button addOffer,searchOffer ,map;
     private ActionBar actionBar;
     private TextView welcome;
-    private String userName;
+    private String userName ,email ,phoneNum;
     private String usertype;
     private RecyclerView postsRecycle;
     private FirebaseAuth mAuth;
@@ -50,6 +51,10 @@ public class HomePageActivity extends AppCompatActivity {
         map = findViewById(R.id.Mymap);
         welcome = (TextView) findViewById(R.id.TextWelcome);
         getUserName();
+        getUserType();
+        getUserId();
+        getEmail();
+        getPhoneNum();
         welcome.setText("welcome " + userName);
 
         postsRecycle = findViewById(R.id.recyclePosts);
@@ -60,10 +65,11 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, Angel_homePage.class);
-                getUserType();
-                getUserId();
                 intent.putExtra("type", usertype);
                 intent.putExtra("uid", uid);
+                intent.putExtra("email", email);
+                intent.putExtra("name",userName);
+                intent.putExtra("phone",phoneNum);
                 startActivity(intent);
                 finish();
             }
@@ -72,6 +78,11 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, SearchPostActivity.class);
+                intent.putExtra("type", usertype);
+                intent.putExtra("uid", uid);
+                intent.putExtra("email", email);
+                intent.putExtra("name",userName);
+                intent.putExtra("phone",phoneNum);
                 startActivity(intent);
                 finish();
 
@@ -86,59 +97,6 @@ public class HomePageActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        //////////////////////////////////////
-
-
-//
-//
-//        actionBar = getSupportActionBar();
-//
-//        BottomNavigationView navigationView = findViewById(R.id.navigation);
-//        navigationView.setOnItemSelectedListener(selectedListener);
-//
-//        actionBar.setTitle("Home");
-//        AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//        ft1.replace(R.id.content, angelHomeFragment, "");
-//        ft1.commit();
-//
-//
-//
-//    }
-//
-//    private NavigationBarView.OnItemSelectedListener selectedListener =
-//            new NavigationBarView.OnItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    switch (item.getItemId()){
-//                        case R.id.nav_home:
-//                            actionBar.setTitle("Home");
-//                            AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//                            ft1.replace(R.id.content, angelHomeFragment, "");
-//                            ft1.commit();
-//                            return true;
-//                        case R.id.nav_profile:
-//                            actionBar.setTitle("Profile");
-//                            profileFragment profileFragment = new profileFragment();
-//                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-//                            ft2.replace(R.id.content, profileFragment, "");
-//                            ft2.commit();
-//                            return true;
-//                        case R.id.nav_chat:
-//                            actionBar.setTitle("Chats");
-//                            ChatListFragment chatListFragment = new ChatListFragment();
-//                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
-//                            ft3.replace(R.id.content, chatListFragment, "");
-//                            ft3.commit();
-//                            return true;
-////                        case R.id.nav_user:
-////                            return true;
-//                    }
-//                    return false;
-//                }
-//            };
 
     }
 
@@ -160,12 +118,20 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intentMain);
                 return true;
             case R.id.action_profile:
-                intentProfile.putExtra("name",userName);
                 intentProfile.putExtra("uid",uid);
+                intentProfile.putExtra("type",usertype);
+                intentProfile.putExtra("name",userName);
+                intentProfile.putExtra("email",email);
+                intentProfile.putExtra("phone",phoneNum);
 
                 startActivity(intentProfile);
                 return true;
             case R.id.action_chat:
+                intentChat.putExtra("uid",uid);
+                intentChat.putExtra("type",usertype);
+                intentChat.putExtra("name",userName);
+                intentChat.putExtra("email",email);
+                intentChat.putExtra("phone",phoneNum);
                 startActivity(intentChat);
                 return true;
         }
@@ -198,6 +164,26 @@ public class HomePageActivity extends AppCompatActivity {
         if(UserIdFromLogin != null)
         {
             uid= UserIdFromLogin.getString("uid");
+        }
+
+    }
+
+    public void getEmail(){
+        Intent intent=getIntent();
+        Bundle Email = intent.getExtras();
+        if(Email != null)
+        {
+            email= Email.getString("email");
+        }
+
+    }
+
+    public void getPhoneNum(){
+        Intent intent=getIntent();
+        Bundle PhoneNum = intent.getExtras();
+        if(PhoneNum != null)
+        {
+            phoneNum= PhoneNum.getString("phone");
         }
 
     }

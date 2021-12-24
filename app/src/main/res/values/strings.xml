@@ -45,6 +45,7 @@
     <string name="reserve">"reserve"</string>
 
     <string name="searchOfferHeadLine">"search for hosting offer"</string>
+    <string name="edit_details">"edit_details"</string>
 
     <string-array name="Type">
         <item>Angel</item>

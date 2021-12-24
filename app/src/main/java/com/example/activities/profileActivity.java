@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,14 +40,15 @@ import java.util.List;
 public class profileActivity extends AppCompatActivity {
 
 
-    private String userName;
+
     private String usertype;
-    private String uid;
+    private String uid ,userName ,email ,phoneNum;
     private TextView txtVname ,txtVphone,txtVemail;
     private DatabaseReference databaseRef;
     private List<user> usersList;
     private StorageReference mStorgeRef;
     private ImageView img;
+    private Button back;
     public Uri imguri;
 
     @Override
@@ -57,23 +59,39 @@ public class profileActivity extends AppCompatActivity {
         txtVphone=findViewById(R.id.phoneToOverride);
         txtVemail=findViewById(R.id.emailToOverride);
         img =findViewById(R.id.avatarIv);
+        back=findViewById(R.id.back);
         getUserId();
         getUserName();
+        getEmail();
+        getUserType();
         databaseRef = FirebaseDatabase.getInstance().getReference();
         mStorgeRef = FirebaseStorage.getInstance().getReference().child("profile_pic/"+uid);
         usersList=new ArrayList<>();
 
         txtVname.setText(userName);
+        txtVemail.setText(email);
 
-//        ReadNamesFromFirebase();
-//
-//        for (user u:usersList) {
-//           if(u.getUid()==uid){
-//              txtVemail.setText(u.getEmail());
-//
-//           }
-//        }
+        ReadUsersFromFirebase();
 
+        for (user u:usersList) {
+           if(u.getUid()==uid){
+              txtVphone.setText(u.getPhoneNum());
+
+           }
+        }
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(profileActivity.this,HomePageActivity.class);
+                intent.putExtra("uid",uid);
+                intent.putExtra("type",usertype);
+                intent.putExtra("name",userName);
+                intent.putExtra("email",email);
+                startActivity(intent);
+            }
+        });
 
         mStorgeRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -160,9 +178,38 @@ public class profileActivity extends AppCompatActivity {
         }
 
     }
+    public void getEmail(){
+        Intent intent=getIntent();
+        Bundle Email = intent.getExtras();
+        if(Email != null)
+        {
+            email= Email.getString("email");
+        }
+
+    }
+
+    public void getPhoneNum(){
+        Intent intent=getIntent();
+        Bundle PhoneNum = intent.getExtras();
+        if(PhoneNum != null)
+        {
+            phoneNum= PhoneNum.getString("phone");
+        }
+
+    }
+
+    public void getUserType(){
+        Intent intent=getIntent();
+        Bundle getUserTypeLogin = intent.getExtras();
+        if(getUserTypeLogin != null)
+        {
+            usertype = getUserTypeLogin.getString("type");
+        }
+
+    }
 
 
-    private void ReadNamesFromFirebase(){
+    private void ReadUsersFromFirebase(){
 
         databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,7 +217,7 @@ public class profileActivity extends AppCompatActivity {
                 for (DataSnapshot currUser:snapshot.getChildren()) {
                     user tempUser=currUser.getValue(user.class);
                     assert tempUser!=null;
-                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType());
+                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType(), tempUser.getPhoneNum());
                     usersList.add(tempUserToList);
                 }
             }
@@ -188,6 +235,10 @@ public class profileActivity extends AppCompatActivity {
         Intent intent =new Intent(profileActivity.this,EditProfileActiviry.class);
         intent.putExtra("uid",uid);
         intent.putExtra("name",userName);
+        intent.putExtra("email",email);
+        intent.putExtra("phone",phoneNum);
+        intent.putExtra("type",usertype);
+
         startActivity(intent);
     }
 
