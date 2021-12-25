@@ -193,8 +193,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         holder.btnChat.setOnClickListener(v->{
             Intent intentChat =new Intent(context,ChatActivity.class);
-            intentChat.putExtra("publisherUid",PostList.get(position).getpublisherUid());
-          
+            intentChat.putExtra("publisheruid",PostList.get(pos).getpublisherUid());
+            intentChat.putExtra("uid",uid);
             context.startActivity(intentChat);
         });
 
