@@ -142,9 +142,10 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds: snapshot.getChildren()){
-                            chat c = ds.getValue(chat.class);
-                            if(c.getReciver().equals(myUid) && c.getSender().equals(hisUid)){
-                                HashMap<String, Object> hasSeenHashMap = new HashMap<>();
+                                    chat c = ds.getValue(chat.class);
+                                    assert c!= null;
+                                    if(c.getReciver().equals(myUid) && c.getSender().equals(hisUid)){
+                                        HashMap<String, Object> hasSeenHashMap = new HashMap<>();
                                 hasSeenHashMap.put("isSeen", true);
                                 ds.getRef().updateChildren(hasSeenHashMap);
                             }
@@ -167,6 +168,7 @@ public class ChatActivity extends AppCompatActivity {
                         chatList.clear();
                         for (DataSnapshot ds: snapshot.getChildren()){
                             chat c = ds.getValue(chat.class);
+                            assert c!= null;
                             if(c.getReciver().equals(myUid) && c.getSender().equals(hisUid) ||
                                     c.getReciver().equals(hisUid) && c.getSender().equals(myUid)){
                                 chatList.add(c);
@@ -210,21 +212,22 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
-//    private void checkUserStatus() {
-//        FirebaseUserrseUser user = firebaseAuth.getCurrentUser();
-//        if (user != null) {
-//
-//            myUid = user.getUid();
-//
-//        } else {
-//            startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }
-//    }
+    private void checkUserStatus() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+
+            myUid = user.getUid();
+
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+    }
 
 
     @Override
     protected void onStart() {
+        checkUserStatus();
         super.onStart();
     }
 
