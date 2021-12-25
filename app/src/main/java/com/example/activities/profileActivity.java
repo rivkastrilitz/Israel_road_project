@@ -49,10 +49,9 @@ public class profileActivity extends AppCompatActivity {
     private String uid ,userName ,email ,phoneNum;
     private TextView txtVname ,txtVphone,txtVemail;
     private DatabaseReference databaseRef;
-
     private StorageReference mStorgeRef;
     private ImageView img;
-    private Button back;
+    private Button back ,editDeatails;
     public Uri imguri;
 
     @Override
@@ -64,6 +63,7 @@ public class profileActivity extends AppCompatActivity {
         txtVemail=findViewById(R.id.emailToOverride);
         img =findViewById(R.id.avatarIv);
         back=findViewById(R.id.back);
+        editDeatails=findViewById(R.id.edit_user_deatails);
         getUserId();
         getUserName();
         getEmail();
@@ -98,6 +98,16 @@ public class profileActivity extends AppCompatActivity {
                 intent.putExtra("uid",uid);
                 intent.putExtra("type",usertype);
                 intent.putExtra("name",userName);
+                intent.putExtra("email",email);
+                startActivity(intent);
+            }
+        });
+
+        editDeatails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(profileActivity.this,EditUserDetailsActivity.class);
+                intent.putExtra("uid",uid);
                 intent.putExtra("email",email);
                 startActivity(intent);
             }
