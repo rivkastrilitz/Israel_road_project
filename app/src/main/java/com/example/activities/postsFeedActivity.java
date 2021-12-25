@@ -129,7 +129,7 @@ public class postsFeedActivity extends AppCompatActivity {
         for (post p:postList) {
             Comparator<String> comp=new compareDate();
             int compareAns=comp.compare(p.getFromDate(),from_date);
-            if(compareAns==1 || compareAns==0){
+            if(compareAns>=0){
                 sortedPostList.add(p);
             }
 

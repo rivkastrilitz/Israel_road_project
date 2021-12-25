@@ -62,6 +62,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_post_shape, parent, false);
         ViewHolder holder= new ViewHolder(view);
         mAuth = FirebaseAuth.getInstance();
+        if(PostList.isEmpty()){
+            Toast.makeText(context,"no post on tahat date " ,Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -80,7 +83,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
                 else {
                     user currUser=task.getResult().getValue(user.class);
-                    holder.txtNameAngel.setText(currUser.getName()+"s offer");
+                    holder.txtNameAngel.setText(currUser.getName()+"'s offer");
                 }
             }
         });
@@ -190,6 +193,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         holder.btnChat.setOnClickListener(v->{
             Intent intentChat =new Intent(context,ChatActivity.class);
+            intentChat.putExtra("publisherUid",PostList.get(position).getpublisherUid());
+          
             context.startActivity(intentChat);
         });
 
