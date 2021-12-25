@@ -41,7 +41,6 @@ public class postsFeedActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private List<post> postList;
     private List<String> postIdsList;
-    private List<String> publisherNamesList;
     private List<post>sortedPostList;
     private String uid ,fromDate_search;
     private String userName ,email ,phoneNum;
@@ -60,7 +59,6 @@ public class postsFeedActivity extends AppCompatActivity {
         uid=mAuth.getCurrentUser().getUid();
         postList=new ArrayList<>();
         postIdsList=new ArrayList<>();
-        publisherNamesList=new ArrayList<>();
         sortedPostList=new ArrayList<>();
         getUserName();
         getUserType();
@@ -68,7 +66,6 @@ public class postsFeedActivity extends AppCompatActivity {
         getEmail();
         getPhoneNum();
 
-        ReadNamesFromFirebase();
         readPostFromFirebase();
     }
 
@@ -94,7 +91,6 @@ public class postsFeedActivity extends AppCompatActivity {
                     postList.clear();
                     sortedPostList.clear();
                     postIdsList.clear();
-                    publisherNamesList.clear();
 
                     for (DataSnapshot currPost : snapshot.getChildren()) {
                         String post_id = currPost.getKey();
@@ -105,21 +101,15 @@ public class postsFeedActivity extends AppCompatActivity {
                                 tempPost1.getCapacity(), tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(), tempPost1.getPhoneNum());
                         postList.add(tempPost2);
 
-                        String publisherName = databaseRef.child("Users").child(tempPost2.getpublisherUid()).getClass().toString();
-                        Toast.makeText(postsFeedActivity.this, publisherName, Toast.LENGTH_SHORT).show();
-                        publisherNamesList.add(publisherName);
-
-
-                        PostAdapter adapter = new PostAdapter(postsFeedActivity.this, uid);
-                        getDatefromSearch();
-                        SortOffersByFromDate(fromDate_search);
-                        adapter.setPosts(sortedPostList);
-                        adapter.setPostsIdList(postIdsList);
-                        adapter.setPublishersNameList(publisherNamesList);
-                        postsRecycle.setAdapter(adapter);
-                        postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
-
                     }
+
+                    PostAdapter adapter = new PostAdapter(postsFeedActivity.this, uid);
+                    getDatefromSearch();
+                    SortOffersByFromDate(fromDate_search);
+                    adapter.setPosts(sortedPostList);
+                    adapter.setPostsIdList(postIdsList);
+                    postsRecycle.setAdapter(adapter);
+                    postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
                 }
             }
 
@@ -130,36 +120,6 @@ public class postsFeedActivity extends AppCompatActivity {
 
 
         });
-
-    }
-
-    //todo
-    private void ReadNamesFromFirebase(){
-        databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot currUser:snapshot.getChildren()) {
-
-                    user tempUser=currUser.getValue(user.class);
-                    assert tempUser!=null;
-                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType(),tempUser.getPhoneNum());
-                    //for (int i = 0; i < postList.size(); i++) {
-                    //if(postList.get(i).getpublisherUid()==tempUserToList.getUid()){
-                    publisherNamesList.add(tempUserToList.getName());
-
-
-
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
     }
 

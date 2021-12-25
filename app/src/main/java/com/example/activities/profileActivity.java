@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +19,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.model.post;
 import com.example.model.user;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +49,7 @@ public class profileActivity extends AppCompatActivity {
     private String uid ,userName ,email ,phoneNum;
     private TextView txtVname ,txtVphone,txtVemail;
     private DatabaseReference databaseRef;
-    private List<user> usersList;
+
     private StorageReference mStorgeRef;
     private ImageView img;
     private Button back;
@@ -66,19 +70,25 @@ public class profileActivity extends AppCompatActivity {
         getUserType();
         databaseRef = FirebaseDatabase.getInstance().getReference();
         mStorgeRef = FirebaseStorage.getInstance().getReference().child("profile_pic/"+uid);
-        usersList=new ArrayList<>();
+
 
         txtVname.setText(userName);
         txtVemail.setText(email);
 
-        ReadUsersFromFirebase();
+        databaseRef.child("Users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>(){
 
-        for (user u:usersList) {
-           if(u.getUid()==uid){
-              txtVphone.setText(u.getPhoneNum());
+          @Override
+          public void onComplete(@NonNull Task<DataSnapshot> task) {
+              if (!task.isSuccessful()) {
+                  Log.e("firebase", "Error getting data", task.getException());
+              }
+              else {
+                  user cure_user=  task.getResult().getValue(user.class);
+                  txtVphone.setText(cure_user.getPhoneNum());
+              }
+          }
+        });
 
-           }
-        }
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -205,28 +215,6 @@ public class profileActivity extends AppCompatActivity {
         {
             usertype = getUserTypeLogin.getString("type");
         }
-
-    }
-
-
-    private void ReadUsersFromFirebase(){
-
-        databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot currUser:snapshot.getChildren()) {
-                    user tempUser=currUser.getValue(user.class);
-                    assert tempUser!=null;
-                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType(), tempUser.getPhoneNum());
-                    usersList.add(tempUserToList);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 

@@ -39,7 +39,7 @@ public class SearchPostActivity extends AppCompatActivity {
 
     private EditText location;
     private Button search ,back,fromdate;
-    private String txtFromDate,txtToDate,txtLocation;
+    private String txtFromDate,txtLocation;
     private DatePickerDialog datePickerDialog;
     private String userName ,email ,phoneNum;
     private String usertype ,uid;
