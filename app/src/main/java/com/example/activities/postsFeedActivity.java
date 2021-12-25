@@ -41,9 +41,10 @@ public class postsFeedActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private List<post> postList;
     private List<String> postIdsList;
-    private List<String> publisherNamesList;
     private List<post>sortedPostList;
     private String uid ,fromDate_search;
+    private String userName ,email ,phoneNum;
+    private String usertype;
     AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
 
 
@@ -58,10 +59,13 @@ public class postsFeedActivity extends AppCompatActivity {
         uid=mAuth.getCurrentUser().getUid();
         postList=new ArrayList<>();
         postIdsList=new ArrayList<>();
-        publisherNamesList=new ArrayList<>();
         sortedPostList=new ArrayList<>();
+        getUserName();
+        getUserType();
+        getUserId();
+        getEmail();
+        getPhoneNum();
 
-        ReadNamesFromFirebase();
         readPostFromFirebase();
     }
 
@@ -97,21 +101,15 @@ public class postsFeedActivity extends AppCompatActivity {
                                 tempPost1.getCapacity(), tempPost1.getRestrictions(), tempPost1.getpublisherUid(), tempPost1.getPostid(), tempPost1.getPhoneNum());
                         postList.add(tempPost2);
 
-                        String publisherName = databaseRef.child("Users").child(tempPost2.getpublisherUid()).getClass().toString();
-                        Toast.makeText(postsFeedActivity.this, publisherName, Toast.LENGTH_SHORT).show();
-                        publisherNamesList.add(publisherName);
-
-
-                        PostAdapter adapter = new PostAdapter(postsFeedActivity.this, uid);
-                        getDatefromSearch();
-                        SortOffersByFromDate(fromDate_search);
-                        adapter.setPosts(sortedPostList);
-                        adapter.setPostsIdList(postIdsList);
-                        adapter.setPublishersNameList(publisherNamesList);
-                        postsRecycle.setAdapter(adapter);
-                        postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
-
                     }
+
+                    PostAdapter adapter = new PostAdapter(postsFeedActivity.this, uid);
+                    getDatefromSearch();
+                    SortOffersByFromDate(fromDate_search);
+                    adapter.setPosts(sortedPostList);
+                    adapter.setPostsIdList(postIdsList);
+                    postsRecycle.setAdapter(adapter);
+                    postsRecycle.setLayoutManager(new GridLayoutManager(postsFeedActivity.this, 1));
                 }
             }
 
@@ -122,35 +120,6 @@ public class postsFeedActivity extends AppCompatActivity {
 
 
         });
-
-    }
-
-    private void ReadNamesFromFirebase(){
-        databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot currUser:snapshot.getChildren()) {
-
-                    user tempUser=currUser.getValue(user.class);
-                    assert tempUser!=null;
-                    user tempUserToList=new user(tempUser.getUid(),tempUser.getName(),tempUser.getEmail(),tempUser.getType());
-                    //for (int i = 0; i < postList.size(); i++) {
-                    //if(postList.get(i).getpublisherUid()==tempUserToList.getUid()){
-                    publisherNamesList.add(tempUserToList.getName());
-
-
-
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
     }
 
@@ -193,7 +162,7 @@ public class postsFeedActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intentMain = new Intent(this, MainActivity.class);
-        Intent intentChat = new Intent(this, ChatActivity.class);
+        Intent intentChat = new Intent(this, cahtListActivity.class);
         Intent intentProfile = new Intent(this, profileActivity.class);
 
         switch (item.getItemId()) {
@@ -201,15 +170,76 @@ public class postsFeedActivity extends AppCompatActivity {
                 startActivity(intentMain);
                 return true;
             case R.id.action_profile:
+                intentProfile.putExtra("uid",uid);
+                intentProfile.putExtra("type",usertype);
+                intentProfile.putExtra("name",userName);
+                intentProfile.putExtra("email",email);
+                intentProfile.putExtra("phone",phoneNum);
+
                 startActivity(intentProfile);
                 return true;
             case R.id.action_chat:
+                intentChat.putExtra("uid",uid);
+                intentChat.putExtra("type",usertype);
+                intentChat.putExtra("name",userName);
+                intentChat.putExtra("email",email);
+                intentChat.putExtra("phone",phoneNum);
                 startActivity(intentChat);
                 return true;
         }
         return true;
     }
 
+
+    public void getUserName(){
+        Intent intent=getIntent();
+        Bundle nameFromLogin = intent.getExtras();
+        if(nameFromLogin != null)
+        {
+            userName= nameFromLogin.getString("name");
+        }
+
+    }
+
+    public void getUserType(){
+        Intent intent=getIntent();
+        Bundle getUserTypeLogin = intent.getExtras();
+        if(getUserTypeLogin != null)
+        {
+            usertype = getUserTypeLogin.getString("type");
+        }
+
+    }
+
+    public void getUserId(){
+        Intent intent=getIntent();
+        Bundle UserIdFromLogin = intent.getExtras();
+        if(UserIdFromLogin != null)
+        {
+            uid= UserIdFromLogin.getString("uid");
+        }
+
+    }
+
+    public void getEmail(){
+        Intent intent=getIntent();
+        Bundle Email = intent.getExtras();
+        if(Email != null)
+        {
+            email= Email.getString("email");
+        }
+
+    }
+
+    public void getPhoneNum(){
+        Intent intent=getIntent();
+        Bundle PhoneNum = intent.getExtras();
+        if(PhoneNum != null)
+        {
+            phoneNum= PhoneNum.getString("phone");
+        }
+
+    }
 
 
 

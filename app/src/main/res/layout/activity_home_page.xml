@@ -8,18 +8,6 @@
 
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        app:menu="@menu/menu_nav"
-        tools:layout_editor_absoluteX="0dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
     <TextView
         android:id="@+id/TextWelcome"
@@ -82,17 +70,18 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="310dp"
-        android:layout_height="447dp"
+        android:layout_width="322dp"
+        android:layout_height="483dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/israel_road"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
+        app:layout_constraintVertical_bias="0.754" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

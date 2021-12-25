@@ -75,18 +75,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.815" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
-        app:menu="@menu/menu_nav"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-13dp"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <Button
         android:id="@+id/Backbtn"

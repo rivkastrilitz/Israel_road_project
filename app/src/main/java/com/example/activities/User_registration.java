@@ -28,7 +28,7 @@ import java.util.HashMap;
 
 public class User_registration extends AppCompatActivity {
     private Button btn2_signup;
-    private EditText user_name,name, pass_word ;
+    private EditText user_name,name, pass_word ,phoneNum;
     private Spinner user_type;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
@@ -44,6 +44,7 @@ public class User_registration extends AppCompatActivity {
         pass_word=findViewById(R.id.registration_password);
         user_type=findViewById(R.id.registration_UserType);
         name=findViewById(R.id.registration_name);
+        phoneNum=findViewById(R.id.registration_phone);
         btn2_signup=findViewById(R.id.registration_signUp);
 
         mAuth=FirebaseAuth.getInstance();
@@ -62,6 +63,7 @@ public class User_registration extends AppCompatActivity {
                 String txtPassword= pass_word.getText().toString().trim();
                 String txtType=user_type.getSelectedItem().toString().trim();
                 String txtName=name.getText().toString().trim();
+                String txtPhone=phoneNum.getText().toString().trim();
 
 
                 if(txtUser_name.isEmpty())
@@ -89,7 +91,7 @@ public class User_registration extends AppCompatActivity {
                     return;
                 }
 
-                registerUser( txtName , txtUser_name , txtPassword,txtType);
+                registerUser( txtName , txtUser_name , txtPassword,txtType ,txtPhone);
 
 
 
@@ -99,13 +101,13 @@ public class User_registration extends AppCompatActivity {
         });
     }
 
-    private void registerUser(final String Name, final String UserName, String Password,final String Type){
+    private void registerUser(final String Name, final String UserName, String Password,final String Type ,final String Phone){
 
         mAuth.createUserWithEmailAndPassword(UserName , Password).addOnSuccessListener(new OnSuccessListener<AuthResult>(){
             @Override
             public void onSuccess(AuthResult authResult) {
 
-                user newUser=new user(mAuth.getCurrentUser().getUid(),Name,UserName,Type);
+                user newUser=new user(mAuth.getCurrentUser().getUid(),Name,UserName,Type,Phone);
                 databaseRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

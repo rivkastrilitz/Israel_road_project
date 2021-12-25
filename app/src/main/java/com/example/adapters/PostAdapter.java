@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,11 @@ import com.example.activities.ReservationsPopUpActivity;
 import com.example.activities.restrictionsPopUpActivity;
 import com.example.comperators.sortByFromDate;
 import com.example.model.post;
+import com.example.model.user;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,6 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
 
+
     public PostAdapter(Context context,String uid){
         this.context = context;
         this.uid=uid;
@@ -57,14 +63,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ViewHolder holder= new ViewHolder(view);
         mAuth = FirebaseAuth.getInstance();
 
+
+
         return new ViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //todo chek why not working .
-        holder.txtNameAngel.setText(publisherNamesList.get(position));
+
+        holder.databaseRef.child("Users").child(PostList.get(position).getpublisherUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    user currUser=task.getResult().getValue(user.class);
+                    holder.txtNameAngel.setText(currUser.getName()+"s offer");
+                }
+            }
+        });
+
 
         holder.txtAddress.setText(PostList.get(position).getAddress());
         holder.txtFromDate.setText(PostList.get(position).getFromDate());
@@ -73,10 +93,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.txtRestrictions.setText(PostList.get(position).getRestrictions());
         holder.txtPhoneNum.setText(PostList.get(position).getPhoneNum());
 
+
         int pos=position;
+
         holder.btnDeleteOffer.setOnClickListener(v-> {
             //only the user that published this post can delete it
-            if (mAuth.getCurrentUser().getUid().equals( PostList.get(pos).getpublisherUid())){
+            if (this.uid.equals( PostList.get(pos).getpublisherUid())){
                 //dialog
 
                 builder.setTitle("remove offer").setMessage("are you sure you want to delete this offer")
@@ -85,6 +107,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).getRef().removeValue();
+                      //  PostList.remove(pos);
                         Toast.makeText(context,"offer removed", Toast.LENGTH_SHORT).show();
                     }
 
@@ -95,8 +118,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         dialog.cancel();
                     }
                 });
-
-
 
                 AlertDialog alterdialod = builder.create();
                 alterdialod.show();
@@ -123,10 +144,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //            int numOfReservation=Integer.parseInt(reservationsNum);
 
             int updateCapacity=currCapacity-1;
-            //update capacity in list
-            PostList.get(position).setCapacity(updateCapacity);
+
             if(updateCapacity>=0){
-                holder.databaseRef.child("HostingOffer").child(postIdsList.get(position)).child("capacity").setValue(updateCapacity);
+                //update capacity in list
+                PostList.get(pos).setCapacity(updateCapacity);
+                //update capacity in firebase
+                holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        }
+                        else {
+                            post cure_post =  task.getResult().getValue(post.class);
+                            cure_post.setCapacity(updateCapacity);
+                            holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).setValue(cure_post).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                });
+
             }else{
                 Toast.makeText(context,"sorry we are full,you may search for a different Angel", Toast.LENGTH_SHORT).show();
             }
@@ -145,6 +190,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         holder.btnChat.setOnClickListener(v->{
             Intent intentChat =new Intent(context,ChatActivity.class);
+            intentChat.putExtra("publisheruid",PostList.get(pos).getpublisherUid());
+            intentChat.putExtra("uid",uid);
             context.startActivity(intentChat);
         });
 
@@ -168,10 +215,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void setPublishersNameList(List<String> publisherNamesList){
-        this.publisherNamesList = publisherNamesList;
-        notifyDataSetChanged();
-    }
+
 
 
 
@@ -205,13 +249,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             databaseRef=FirebaseDatabase.getInstance().getReference();
 
             builder = new AlertDialog.Builder(context);
-
-
-
-
-
-
-
 
 
         }

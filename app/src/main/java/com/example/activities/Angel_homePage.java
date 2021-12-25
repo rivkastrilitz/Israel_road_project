@@ -43,10 +43,10 @@ public class Angel_homePage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseRef;
 
-    private String uid="" ;
-    private String usertype="" ;
+    private String uid ,email ;
+    private String usertype ,userName ,phone;
     private EditText AngelAddress,capacity,restrictions,phoneNum;
-    private Button createOffer ,fromDate,toDate ;
+    private Button createOffer ,fromDate,toDate ,back ;
     private DatePickerDialog datePickerDialog;
     private ActionBar actionBar;
     AirplaneModeChangeReceiver airplaneModeChangeReceiver = new AirplaneModeChangeReceiver();
@@ -62,40 +62,43 @@ public class Angel_homePage extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference();
 
 
-
-        AngelAddress=(EditText)findViewById(R.id.post_address);
-        fromDate=(Button) findViewById(R.id.fromdatePickerButton);
-        toDate=(Button) findViewById(R.id.todatePickerButton);
-        capacity=(EditText)findViewById(R.id.post_capacity);
-        restrictions=(EditText)findViewById(R.id.post_restrictions);
-        phoneNum=(EditText)findViewById(R.id.post_phoneNum);
-        createOffer=(Button)findViewById(R.id.createOffer);
+        AngelAddress = (EditText) findViewById(R.id.post_address);
+        fromDate = (Button) findViewById(R.id.fromdatePickerButton);
+        toDate = (Button) findViewById(R.id.todatePickerButton);
+        capacity = (EditText) findViewById(R.id.post_capacity);
+        restrictions = (EditText) findViewById(R.id.post_restrictions);
+        phoneNum = (EditText) findViewById(R.id.post_phoneNum);
+        createOffer = (Button) findViewById(R.id.createOffer);
+        back=(Button)findViewById(R.id.back);
 
         initDatePicker();
         fromDate.setText(getTodaysDate());
         toDate.setText(getTodaysDate());
+        getUserType();
+        getUserId();
+        getUserName();
+        getEmail();
+        getPhoneNum();
 
 
-
-
-        createOffer.setOnClickListener(new View.OnClickListener(){
+        createOffer.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String txtAngelAddress = AngelAddress.getText().toString().trim();
 
-                String txtFromDate=fromDate.getText().toString();
-                String txtToDate=toDate.getText().toString();
-                int txtCapacity=Integer.parseInt(capacity.getText().toString());
-                String txtRestrictions=restrictions.getText().toString();
-                String txtPhoneNum=phoneNum.getText().toString();
+                String txtFromDate = fromDate.getText().toString();
+                String txtToDate = toDate.getText().toString();
+                int txtCapacity = Integer.parseInt(capacity.getText().toString());
+                String txtRestrictions = restrictions.getText().toString();
+                String txtPhoneNum = phoneNum.getText().toString();
 
-                if(checkValidation(txtAngelAddress,txtFromDate,txtToDate,txtCapacity,txtPhoneNum)) {
-                    getUserType();
-                    if(usertype.equals("Angel")){
-                        addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions,txtPhoneNum);
-                    }else{
-                        Toast.makeText(Angel_homePage.this,"Traveler cant add Hosting offer",Toast.LENGTH_SHORT).show();
+                if (checkValidation(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtPhoneNum)) {
+
+                    if (usertype.equals("Angel")) {
+                        addOffer(txtAngelAddress, txtFromDate, txtToDate, txtCapacity, txtRestrictions, txtPhoneNum);
+                    } else {
+                        Toast.makeText(Angel_homePage.this, "Traveler cant add Hosting offer", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -103,59 +106,59 @@ public class Angel_homePage extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Angel_homePage.this,HomePageActivity.class);
+                intent.putExtra("uid",uid);
+                intent.putExtra("type",usertype);
+                intent.putExtra("name",userName);
+                intent.putExtra("email",email);
+                intent.putExtra("phone",phone);
+                startActivity(intent);
 
-
-
-
-//        actionBar = getSupportActionBar();
-//
-//        BottomNavigationView navigationView = findViewById(R.id.navigation);
-//        navigationView.setOnItemSelectedListener(selectedListener);
-//
-//        actionBar.setTitle("Create Hosting Offer");
-//        AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//        ft1.replace(R.id.content, angelHomeFragment, "");
-//        ft1.commit();
+            }
+        });
 
 
     }
 
 
-
-//    private NavigationBarView.OnItemSelectedListener selectedListener =
-//            new NavigationBarView.OnItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    switch (item.getItemId()){
-//                        case R.id.nav_home:
-//                            actionBar.setTitle("Home");
-//                            AngelHomeFragment angelHomeFragment = new AngelHomeFragment();
-//                            FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
-//                            ft1.replace(R.id.content, angelHomeFragment, "");
-//                            ft1.commit();
-//                            return true;
-//                        case R.id.nav_profile:
-//                            actionBar.setTitle("Profile");
-//                            profileFragment profileFragment = new profileFragment();
-//                            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-//                            ft2.replace(R.id.content, profileFragment, "");
-//                            ft2.commit();
-//                            return true;
-////                        case R.id.nav_user:
-////                            return true;
-//                    }
-//                    return false;
-//                }
-//            };
-
-
     public void getUserId(){
         Intent intent=getIntent();
-        Bundle UserIdLogin = intent.getExtras();
-        if(UserIdLogin != null)
+        Bundle UserId = intent.getExtras();
+        if(UserId != null)
         {
-            uid = UserIdLogin.getString("uid");
+            uid= UserId.getString("uid");
+        }
+
+    }
+
+    public void getUserName(){
+        Intent intent=getIntent();
+        Bundle name = intent.getExtras();
+        if(name != null)
+        {
+            userName= name.getString("name");
+        }
+
+    }
+
+    public void getEmail(){
+        Intent intent=getIntent();
+        Bundle Email = intent.getExtras();
+        if(Email != null)
+        {
+            email= Email.getString("email");
+        }
+
+    }
+    public void getPhoneNum(){
+        Intent intent=getIntent();
+        Bundle PhoneNum = intent.getExtras();
+        if(PhoneNum != null)
+        {
+            phone= PhoneNum.getString("phone");
         }
 
     }
@@ -171,7 +174,6 @@ public class Angel_homePage extends AppCompatActivity {
     }
 
 
-
     private void addOffer(final String address, final String fromdate, String todate,final int capacity,final String restrictions,final  String phoneNum) {
         getUserId();
         post newpost=new post(address,fromdate,todate,capacity,restrictions,uid,"",phoneNum);
@@ -182,6 +184,11 @@ public class Angel_homePage extends AppCompatActivity {
                     Intent intent = new Intent(Angel_homePage.this, HomePageActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     Toast.makeText(Angel_homePage.this, "Your offer successfully Registered", Toast.LENGTH_SHORT).show();
+                    intent.putExtra("uid",uid);
+                    intent.putExtra("type",usertype);
+                    intent.putExtra("name",userName);
+                    intent.putExtra("email",email);
+                    intent.putExtra("phone",phone);
                     startActivity(intent);
                     finish();
 
@@ -306,7 +313,7 @@ public class Angel_homePage extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intentMain = new Intent(this, MainActivity.class);
-        Intent intentChat = new Intent(this, ChatActivity.class);
+        Intent intentChat = new Intent(this, cahtListActivity.class);
         Intent intentProfile = new Intent(this, profileActivity.class);
 
         switch (item.getItemId()) {
@@ -314,9 +321,19 @@ public class Angel_homePage extends AppCompatActivity {
                 startActivity(intentMain);
                 return true;
             case R.id.action_profile:
+                intentProfile.putExtra("uid",uid);
+                intentProfile.putExtra("type",usertype);
+                intentProfile.putExtra("name",userName);
+                intentProfile.putExtra("email",email);
+                intentProfile.putExtra("phone",phone);
                 startActivity(intentProfile);
                 return true;
             case R.id.action_chat:
+                intentChat.putExtra("uid",uid);
+                intentChat.putExtra("type",usertype);
+                intentChat.putExtra("name",userName);
+                intentChat.putExtra("email",email);
+                intentChat.putExtra("phone",phone);
                 startActivity(intentChat);
                 return true;
         }
