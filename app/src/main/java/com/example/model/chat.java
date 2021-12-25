@@ -1,18 +1,19 @@
 package com.example.model;
 
 public class chat {
-    String message, reciver, sender, timestamp;
+    String message, reciver, sender, timestamp ,chatId;
     boolean isSeen;
 
     public chat() {
     }
 
-    public chat(String message, String reciver, String sender, String timestamp, boolean isSeen) {
+    public chat(String message, String reciver, String sender, String timestamp, boolean isSeen,String chatId) {
         this.message = message;
         this.reciver = reciver;
         this.sender = sender;
         this.timestamp = timestamp;
         this.isSeen = isSeen;
+        this.chatId=chatId;
     }
 
     public String getMessage() {
@@ -53,5 +54,13 @@ public class chat {
 
     public void setSeen(boolean seen) {
         isSeen = seen;
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 }
