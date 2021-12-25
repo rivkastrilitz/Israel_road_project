@@ -59,6 +59,7 @@ public class ChatActivity extends AppCompatActivity {
     DatabaseReference userRefForSeen;
 
     List<chat> chatList;
+    List<String> chatIdList;
     ChatAdapter chatAdapter;
 
     String hisUid;
@@ -132,24 +133,39 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
                 readMessages();
-
                 seenMessage();
 
             }
 
             private void seenMessage() {
               //  userRefForSeen = FirebaseDatabase.getInstance().getReference("Chats");
-                firebaseDatabase.getReference().child("Chats").child(hisUid).addValueEventListener(new ValueEventListener() {
+                firebaseDatabase.getReference().child("Chats").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 chat c = ds.getValue(chat.class);
-                                assert c != null;
-                                if (c.getReciver().equals(myUid) && c.getSender().equals(hisUid)) {
-                                    HashMap<String, Object> hasSeenHashMap = new HashMap<>();
-                                    hasSeenHashMap.put("isSeen", true);
-                                    ds.getRef().updateChildren(hasSeenHashMap);
+                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen(),c.getChatId());
+                                assert newc != null;
+                                if (newc.getReciver().equals(myUid) && newc.getSender().equals(hisUid)) {
+
+                                    int i;
+                                    for (i = 0; i < chatList.size(); i++) {
+                                        if(chatList.get(i).getTimestamp().equals(newc.getTimestamp())){
+                                           break;
+                                        }
+                                    }
+                                    newc.setSeen(true);
+                                    firebaseDatabase.getReference().child("Chats").child(chatIdList.get(i)).setValue(newc).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+
+                                            }
+                                        }
+                                    });
+
                                 }
                             }
                         }
@@ -164,6 +180,7 @@ public class ChatActivity extends AppCompatActivity {
 
             private void readMessages() {
                 chatList = new ArrayList<>();
+                chatIdList= new ArrayList<>();
 
                 firebaseDatabase.getReference().child("Chats").addValueEventListener(new ValueEventListener() {
 
@@ -173,12 +190,15 @@ public class ChatActivity extends AppCompatActivity {
                             chatList.clear();
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 chat c = ds.getValue(chat.class);
-                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen());
+                                //todo
+
+                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen(),c.getChatId());
                                 assert newc != null;
-                                Toast.makeText(ChatActivity.this,newc.getMessage(),Toast.LENGTH_SHORT).show();
                                 if (newc.getReciver().equals(myUid) && newc.getSender().equals(hisUid) ||
                                         newc.getReciver().equals(hisUid) && newc.getSender().equals(myUid)) {
                                     chatList.add(newc);
+                                    chatIdList.add(ds.getKey());
+
                                 }
 
                             }
@@ -201,7 +221,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 String timestamp = String.valueOf(System.currentTimeMillis());
-                chat newChat= new chat(message,hisUid,myUid,timestamp,false);
+                chat newChat= new chat(message,hisUid,myUid,timestamp,false,"");
                 databaseReference.child("Chats").push().setValue(newChat);
                 //reset after sending
                 messegeEt.setText("");
@@ -259,37 +279,6 @@ public class ChatActivity extends AppCompatActivity {
         }
 
     }
-//    private void checkUserStatus() {
-//        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        if (user != null) {
-//
-//            myUid = user.getUid();
-//
-//        } else {
-//            startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }
-//    }
-
-//    public void getEmail(){
-//        Intent intent=getIntent();
-//        Bundle Email = intent.getExtras();
-//        if(Email != null)
-//        {
-//            email= Email.getString("email");
-//        }
-//
-//    }
-//
-//    public void getPhoneNum(){
-//        Intent intent=getIntent();
-//        Bundle PhoneNum = intent.getExtras();
-//        if(PhoneNum != null)
-//        {
-//            phoneNum= PhoneNum.getString("phone");
-//        }
-//
-//    }
 
 
 }
