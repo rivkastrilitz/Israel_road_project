@@ -28,6 +28,7 @@
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/fragment_profile.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/Rivka/.android/Israel_road_project/app/src/main/res/layout/pop_up_window.xml" value="0.1" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/activity_angel_home_page.xml" value="0.264" />
+        <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/activity_chat.xml" value="0.6303901437371663" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/activity_edit_profile_activiry.xml" value="0.1671195652173913" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/activity_edit_user_details.xml" value="0.264" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/activity_home_page.xml" value="0.1415525114155251" />
@@ -46,16 +47,6 @@
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/layout/fragment_traveler_home.xml" value="0.1816123188405797" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Rivka/.android/israel_road_project_with_map/Israel_road_project/app/src/main/res/menu/menu_nav.xml" value="0.25416666666666665" />
-<<<<<<< HEAD
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/drawable-anydpi/ic_default_img.xml" value="0.221875" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/drawable/bg_receiver.xml" value="0.221875" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/drawable/bg_sender.xml" value="0.221875" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/layout/activity_chat.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/layout/activity_profile.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/layout/row_chat_left.xml" value="0.45454545454545453" />
-        <entry key="..\:/Users/tehilab/.android/Israel_road_project/app/src/main/res/layout/row_chat_right.xml" value="0.20572916666666666" />
-=======
->>>>>>> 34a272c15f784a7e28ff558570fbcf9769f96be9
       </map>
     </option>
   </component>
