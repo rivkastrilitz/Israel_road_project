@@ -7,13 +7,13 @@ public class chat {
     public chat() {
     }
 
-    public chat(String message, String reciver, String sender, String timestamp, boolean isSeen,String chatId) {
+    public chat(String message, String reciver, String sender, String timestamp, boolean isSeen) {
         this.message = message;
         this.reciver = reciver;
         this.sender = sender;
         this.timestamp = timestamp;
         this.isSeen = isSeen;
-        this.chatId=chatId;
+
     }
 
     public String getMessage() {
@@ -56,11 +56,5 @@ public class chat {
         isSeen = seen;
     }
 
-    public String getChatId() {
-        return chatId;
-    }
 
-    public void setChatId(String chatId) {
-        this.chatId = chatId;
-    }
 }

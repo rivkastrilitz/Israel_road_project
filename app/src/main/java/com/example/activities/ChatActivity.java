@@ -145,7 +145,7 @@ public class ChatActivity extends AppCompatActivity {
                         if (snapshot.exists()) {
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 chat c = ds.getValue(chat.class);
-                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen(),c.getChatId());
+                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen());
                                 assert newc != null;
                                 if (newc.getReciver().equals(myUid) && newc.getSender().equals(hisUid)) {
 
@@ -192,7 +192,7 @@ public class ChatActivity extends AppCompatActivity {
                                 chat c = ds.getValue(chat.class);
                                 //todo
 
-                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen(),c.getChatId());
+                                chat newc=new chat(c.getMessage(),c.getReciver(),c.getSender(),c.getTimestamp(),c.isSeen());
                                 assert newc != null;
                                 if (newc.getReciver().equals(myUid) && newc.getSender().equals(hisUid) ||
                                         newc.getReciver().equals(hisUid) && newc.getSender().equals(myUid)) {
@@ -221,7 +221,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 String timestamp = String.valueOf(System.currentTimeMillis());
-                chat newChat= new chat(message,hisUid,myUid,timestamp,false,"");
+                chat newChat= new chat(message,hisUid,myUid,timestamp,false);
                 databaseReference.child("Chats").push().setValue(newChat);
                 //reset after sending
                 messegeEt.setText("");
