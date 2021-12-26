@@ -76,11 +76,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="Start typing"
-<<<<<<< HEAD
             android:padding="15dp"
-=======
-            android:padding="10dp"
->>>>>>> d8e11a82a86647f97b1016c226bbe39f3f7d1a9c
             android:inputType="textCapSentences|textImeMultiLine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
