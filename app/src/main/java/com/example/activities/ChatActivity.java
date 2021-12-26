@@ -178,6 +178,7 @@ public class ChatActivity extends AppCompatActivity {
                 });
             }
 
+
             private void readMessages() {
                 chatList = new ArrayList<>();
                 chatIdList= new ArrayList<>();
@@ -229,6 +230,38 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+
+
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Chatlist").child(myUid).child(hisUid);
+        databaseReference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    databaseReference1.child("id").setValue(hisUid);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Chatlist").child(hisUid).child(myUid);
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    databaseReference2.child("id").setValue(myUid);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }
