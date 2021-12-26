@@ -45,7 +45,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'androidx.mediarouter:mediarouter:1.2.5'
 
     //mapbox dependencies
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'
