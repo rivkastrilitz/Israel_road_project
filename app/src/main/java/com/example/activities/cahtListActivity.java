@@ -68,8 +68,8 @@ public class cahtListActivity extends AppCompatActivity {
 
             private void loadChats() {
                 userList = new ArrayList<>();
-                reference = FirebaseDatabase.getInstance().getReference("Users");
-                reference.addValueEventListener(new ValueEventListener() {
+                firebaseDatabase.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -139,7 +139,6 @@ public class cahtListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
