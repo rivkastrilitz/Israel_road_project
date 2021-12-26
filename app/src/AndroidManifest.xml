@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.activities"
+    tools:ignore="CoarseFineLocation">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Israel_road"
+        tools:ignore="ExtraText">
+        <activity
+            android:name=".EditUserDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActiviry"
+            android:exported="false" />
+        <activity
+            android:name=".cahtListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Mapactivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReservationsPopUpActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeNo" />
+        <activity
+            android:name=".restrictionsPopUpActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".postsFeedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PostShapeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Angel_homePage"
+            android:exported="false" />
+        <activity
+            android:name=".User_Login"
+            android:exported="false" />
+        <activity
+            android:name=".User_registration"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+    </application>
+
+</manifest>

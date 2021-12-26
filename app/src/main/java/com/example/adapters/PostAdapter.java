@@ -47,6 +47,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private FirebaseAuth mAuth;
     int currCapacity;
     AlertDialog.Builder builder;
+    post cure_post;
 
 
 
@@ -62,6 +63,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_post_shape, parent, false);
         ViewHolder holder= new ViewHolder(view);
         mAuth = FirebaseAuth.getInstance();
+        if(PostList.isEmpty()){
+            Toast.makeText(context,"no post on tahat date " ,Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -80,7 +84,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
                 else {
                     user currUser=task.getResult().getValue(user.class);
-                    holder.txtNameAngel.setText(currUser.getName()+"s offer");
+                    holder.txtNameAngel.setText(currUser.getName()+"'s offer");
                 }
             }
         });
@@ -133,6 +137,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //todo button of undo reservation
         holder.btnReservePlace.setOnClickListener(v-> {
             currCapacity=PostList.get(position).getCapacity();
+            String postId=postIdsList.get(position);
 //            Intent intent=new Intent(context, ReservationsPopUpActivity.class);
 //            intent.putExtra("capacity", currCapacity);
 //            intent.putExtra("postList", (Serializable) PostList);
@@ -147,18 +152,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             if(updateCapacity>=0){
                 //update capacity in list
-                PostList.get(pos).setCapacity(updateCapacity);
+                PostList.get(position).setCapacity(updateCapacity);
                 //update capacity in firebase
-                holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                holder.databaseRef.child("HostingOffer").child(postId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (!task.isSuccessful()) {
                             Log.e("firebase", "Error getting data", task.getException());
                         }
                         else {
-                            post cure_post =  task.getResult().getValue(post.class);
+                            cure_post = task.getResult().getValue(post.class);
                             cure_post.setCapacity(updateCapacity);
-                            holder.databaseRef.child("HostingOffer").child(postIdsList.get(pos)).setValue(cure_post).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                            holder.databaseRef.child("HostingOffer").child(postId).setValue(cure_post).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
