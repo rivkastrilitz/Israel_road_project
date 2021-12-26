@@ -134,7 +134,7 @@ public class postsFeedActivity extends AppCompatActivity {
             }
 
         }
-        sortedPostList.sort(new sortByFromDate());
+       // sortedPostList.sort(new sortByFromDate());
     }
 
 
